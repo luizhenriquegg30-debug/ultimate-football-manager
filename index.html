@@ -423,14 +423,14 @@ tbody tr{transition:.12s}tbody tr:hover td{background:#102119}
 
 <div id="mpEntry" class="mp-entry">
  <div class="mp-shell">
-  <div class="mp-brand"><div class="mp-badge">MULTIPLAYER V1</div><h1>ULTIMATE <span>FM 9</span> ONLINE</h1><p>Contas locais, salas por código, clubes exclusivos e save compartilhado preparado para backend.</p></div>
+  <div class="mp-brand"><div class="mp-badge">MULTIPLAYER ONLINE</div><h1>ULTIMATE <span>FM 9</span> ONLINE</h1><p>Salas por código sincronizadas entre aparelhos. O Single Player continua separado.</p></div>
   <div id="mpAuthView" class="mp-grid">
-   <div class="mp-card"><h2>👤 Sua conta</h2><p class="mp-note">Nesta V1 a identidade fica salva neste aparelho. A camada já está preparada para trocar por autenticação real no backend.</p><input id="mpName" class="mp-input" maxlength="24" placeholder="Nome do treinador"><input id="mpEmail" class="mp-input" maxlength="80" type="email" placeholder="E-mail"><button class="btn" style="width:100%" onclick="mpCreateAccount()">Criar / entrar</button></div>
+   <div class="mp-card"><h2>👤 Seu treinador</h2><p class="mp-note">Seu perfil fica neste aparelho; as salas e jogadores são sincronizados online pelo Supabase.</p><input id="mpName" class="mp-input" maxlength="24" placeholder="Nome do treinador"><input id="mpEmail" class="mp-input" maxlength="80" type="email" placeholder="E-mail"><button class="btn" style="width:100%" onclick="mpCreateAccount()">Criar / entrar</button></div>
    <div class="mp-card"><h2>⚽ Modos de jogo</h2><p class="mp-note">O Single Player original continua intacto. Multiplayer usa uma sala separada.</p><div class="mp-actions"><button class="btn secondary" onclick="mpContinueSingle()">Continuar Single Player</button><button class="btn" onclick="mpShowLobby()">Abrir Multiplayer</button></div></div>
   </div>
   <div id="mpLobbyView" class="mp-hidden">
    <div class="mp-grid">
-    <div class="mp-card"><h2>🌐 Sala online</h2><div id="mpNoRoom"><input id="mpRoomName" class="mp-input" maxlength="30" placeholder="Nome da liga / sala"><button class="btn" style="width:100%;margin-bottom:8px" onclick="mpCreateRoom()">Criar sala</button><div class="mp-actions"><input id="mpJoinCode" class="mp-input" maxlength="8" placeholder="CÓDIGO" style="margin:0;flex:1"><button class="btn secondary" onclick="mpJoinRoom()">Entrar</button></div></div><div id="mpRoomInfo" class="mp-hidden"><span class="mp-note">CÓDIGO DA SALA</span><div id="mpRoomCode" class="mp-room-code">------</div><div id="mpRoomStatus" class="mp-online-pill offline">● Protótipo local</div><p class="mp-note">Compartilhe o código com seus amigos. Para funcionar entre aparelhos, conectaremos este adaptador a um backend no próximo passo.</p><div class="mp-actions"><button class="btn secondary" onclick="mpCopyCode()">Copiar código</button><button class="btn secondary" onclick="mpLeaveRoom()">Sair da sala</button></div></div></div>
+    <div class="mp-card"><h2>🌐 Sala online</h2><div id="mpNoRoom"><input id="mpRoomName" class="mp-input" maxlength="30" placeholder="Nome da liga / sala"><button class="btn" style="width:100%;margin-bottom:8px" onclick="mpCreateRoom()">Criar sala</button><div class="mp-actions"><input id="mpJoinCode" class="mp-input" maxlength="8" placeholder="CÓDIGO" style="margin:0;flex:1"><button class="btn secondary" onclick="mpJoinRoom()">Entrar</button></div></div><div id="mpRoomInfo" class="mp-hidden"><span class="mp-note">CÓDIGO DA SALA</span><div id="mpRoomCode" class="mp-room-code">------</div><div id="mpRoomStatus" class="mp-online-pill offline">● Conectando...</div><p class="mp-note">Compartilhe o código com seus amigos. A sala é sincronizada entre celulares e computadores.</p><div class="mp-actions"><button class="btn secondary" onclick="mpCopyCode()">Copiar código</button><button class="btn secondary" onclick="mpLeaveRoom()">Sair da sala</button></div></div></div>
     <div class="mp-card"><h2>👥 Jogadores</h2><div id="mpPlayers"><p class="mp-note">Entre em uma sala para montar o lobby.</p></div></div>
     <div class="mp-card" style="grid-column:1/-1"><h2>🏟️ Escolha seu clube</h2><p class="mp-note">Cada treinador controla um clube exclusivo na liga compartilhada.</p><div id="mpClubGrid" class="mp-clubs"></div></div>
     <div class="mp-card" style="grid-column:1/-1"><div class="mp-actions"><button class="btn secondary" onclick="mpBackAuth()">Voltar</button><button id="mpStartBtn" class="btn" onclick="mpStartLeague()" disabled>Entrar na liga compartilhada</button></div></div>
@@ -2484,42 +2484,70 @@ window.addEventListener("resize",()=>{if(document.getElementById("academy")?.cla
 save(true);
 
 
-/* ================= MULTIPLAYER V1 =================
-   Adaptador local-first. Preserva todo o motor V9 e encapsula o save
-   em snapshots de sala. O objeto UFMOnlineAdapter é o ponto único que
-   será substituído por Firebase/Supabase/backend próprio na próxima etapa.
-==================================================== */
-const MP_ACCOUNT_KEY="ufm9_mp_account_v1",MP_ROOM_KEY="ufm9_mp_room_v1",MP_SNAPSHOT_PREFIX="ufm9_mp_snapshot_";
-let mpAccount=null,mpRoom=null,mpSelectedClub=null;
+/* ================= MULTIPLAYER ONLINE =================
+   Supabase REST. Use SOMENTE a chave anon/public do projeto; nunca service_role.
+   Configure URL e chave abaixo. Salas ficam online e snapshots são separados
+   por sala + treinador para uma carreira não sobrescrever a outra.
+======================================================== */
+const UFM_SUPABASE_URL="COLE_AQUI_SUA_SUPABASE_URL";
+const UFM_SUPABASE_ANON_KEY="COLE_AQUI_SUA_SUPABASE_ANON_KEY";
+const MP_ACCOUNT_KEY="ufm9_mp_account_v2",MP_ROOM_KEY="ufm9_mp_room_v2";
+let mpAccount=null,mpRoom=null,mpSelectedClub=null,mpPollTimer=null;
+function mpConfigured(){return /^https:\/\/.+\.supabase\.co\/?$/.test(UFM_SUPABASE_URL)&&!UFM_SUPABASE_ANON_KEY.startsWith("COLE_AQUI")}
+async function mpFetch(path,options={}){
+ if(!mpConfigured())throw new Error("SUPABASE_NOT_CONFIGURED");
+ const headers={apikey:UFM_SUPABASE_ANON_KEY,Authorization:`Bearer ${UFM_SUPABASE_ANON_KEY}`,"Content-Type":"application/json",Prefer:"return=representation",...(options.headers||{})};
+ const res=await fetch(UFM_SUPABASE_URL.replace(/\/$/,"")+"/rest/v1/"+path,{...options,headers});
+ if(!res.ok){let detail=await res.text();throw new Error(`Supabase ${res.status}: ${detail}`)}
+ if(res.status===204)return null;let txt=await res.text();return txt?JSON.parse(txt):null
+}
 const UFMOnlineAdapter={
  async createAccount(data){localStorage.setItem(MP_ACCOUNT_KEY,JSON.stringify(data));return data},
- async createRoom(room){localStorage.setItem(MP_ROOM_KEY,JSON.stringify(room));return room},
- async getRoom(code){let r=JSON.parse(localStorage.getItem(MP_ROOM_KEY)||"null");return r&&r.code===code?r:null},
- async saveRoom(room){localStorage.setItem(MP_ROOM_KEY,JSON.stringify(room));return room},
- async pushSnapshot(code,snapshot){localStorage.setItem(MP_SNAPSHOT_PREFIX+code,JSON.stringify({updatedAt:new Date().toISOString(),snapshot}));return true},
- async pullSnapshot(code){return JSON.parse(localStorage.getItem(MP_SNAPSHOT_PREFIX+code)||"null")}
+ async createRoom(room){
+   await mpFetch("ufm_rooms",{method:"POST",body:JSON.stringify({code:room.code,data:room,updated_at:new Date().toISOString()})});
+   localStorage.setItem(MP_ROOM_KEY,JSON.stringify(room));return room
+ },
+ async getRoom(code){let rows=await mpFetch(`ufm_rooms?code=eq.${encodeURIComponent(code)}&select=data&limit=1`);return rows?.[0]?.data||null},
+ async saveRoom(room){
+   room.updatedAt=new Date().toISOString();
+   await mpFetch(`ufm_rooms?code=eq.${encodeURIComponent(room.code)}`,{method:"PATCH",body:JSON.stringify({data:room,updated_at:room.updatedAt})});
+   localStorage.setItem(MP_ROOM_KEY,JSON.stringify(room));return room
+ },
+ async pushSnapshot(code,snapshot){
+   if(!mpAccount)return false;
+   let body={room_code:code,user_id:mpAccount.id,data:snapshot,updated_at:new Date().toISOString()};
+   await mpFetch("ufm_snapshots?on_conflict=room_code,user_id",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=representation"},body:JSON.stringify(body)});return true
+ },
+ async pullSnapshot(code){
+   if(!mpAccount)return null;
+   let rows=await mpFetch(`ufm_snapshots?room_code=eq.${encodeURIComponent(code)}&user_id=eq.${encodeURIComponent(mpAccount.id)}&select=data,updated_at&limit=1`);
+   return rows?.[0]?{snapshot:rows[0].data,updatedAt:rows[0].updated_at}:null
+ }
 };
-function mpId(){return "u_"+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function mpId(){return "u_"+Date.now().toString(36)+Math.random().toString(36).slice(2,9)}
 function mpCode(){let chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",out="";for(let i=0;i<6;i++)out+=chars[Math.floor(Math.random()*chars.length)];return out}
 function mpEsc(v){return String(v??"").replace(/[&<>\"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'\"':"&quot;","'":"&#39;"}[c]))}
-function mpCareerSnapshot(){save(true);let storage={};careerStorageKeys().forEach(k=>storage[k]=localStorage.getItem(k));return {game:"Ultimate Football Manager 9",version:"mp-v1",seasonYear,gameIndex,storage}}
+function mpCareerSnapshot(){mpOriginalSave(true);let storage={};careerStorageKeys().forEach(k=>storage[k]=localStorage.getItem(k));return {game:"Ultimate Football Manager 9",version:"mp-online-v2",seasonYear,gameIndex,club:mpSelectedClub,storage}}
 function mpApplySnapshot(pack){if(!pack?.snapshot?.storage)return false;Object.entries(pack.snapshot.storage).forEach(([k,v])=>{if(/^ufm(4|6|7|9)_/.test(k)||k==="ufm9_competitionRules")localStorage.setItem(k,v)});return true}
-function mpInit(){try{mpAccount=JSON.parse(localStorage.getItem(MP_ACCOUNT_KEY)||"null");mpRoom=JSON.parse(localStorage.getItem(MP_ROOM_KEY)||"null");mpSelectedClub=mpRoom?.players?.find(x=>x.userId===mpAccount?.id)?.club||null}catch(e){};let first=localStorage.getItem("ufm9_mp_welcome_seen")!=="1";if(first)$("mpEntry")?.classList.add("open");if(mpAccount){$("mpName").value=mpAccount.name||"";$("mpEmail").value=mpAccount.email||""}mpRenderLobby()}
-async function mpCreateAccount(){let name=$("mpName").value.trim(),email=$("mpEmail").value.trim();if(name.length<2)return toast("Digite o nome do treinador.");if(!email.includes("@"))return toast("Digite um e-mail válido.");mpAccount=await UFMOnlineAdapter.createAccount({id:mpAccount?.id||mpId(),name,email,createdAt:mpAccount?.createdAt||new Date().toISOString()});toast("Conta do treinador pronta!");mpShowLobby()}
+function mpOnlineError(e){console.error(e);if(String(e?.message).includes("SUPABASE_NOT_CONFIGURED"))toast("Configure o Supabase no arquivo para ativar o multiplayer online.");else toast("Falha de conexão com o multiplayer. Verifique internet/Supabase.")}
+function mpInit(){try{mpAccount=JSON.parse(localStorage.getItem(MP_ACCOUNT_KEY)||"null");mpRoom=JSON.parse(localStorage.getItem(MP_ROOM_KEY)||"null");mpSelectedClub=mpRoom?.players?.find(x=>x.userId===mpAccount?.id)?.club||null}catch(e){};let first=localStorage.getItem("ufm9_mp_welcome_seen")!=="1";if(first)$("mpEntry")?.classList.add("open");if(mpAccount){$("mpName").value=mpAccount.name||"";$("mpEmail").value=mpAccount.email||""}mpRenderLobby();if(mpRoom)mpStartPolling()}
+async function mpCreateAccount(){let name=$("mpName").value.trim(),email=$("mpEmail").value.trim();if(name.length<2)return toast("Digite o nome do treinador.");if(!email.includes("@"))return toast("Digite um e-mail válido.");mpAccount=await UFMOnlineAdapter.createAccount({id:mpAccount?.id||mpId(),name,email,createdAt:mpAccount?.createdAt||new Date().toISOString()});toast("Treinador pronto!");mpShowLobby()}
 function mpContinueSingle(){localStorage.setItem("ufm9_mp_welcome_seen","1");$("mpEntry").classList.remove("open")}
 function mpOpenPanel(){$("mpEntry").classList.add("open");mpAccount?mpShowLobby():mpBackAuth()}
 function mpBackAuth(){$("mpAuthView").classList.remove("mp-hidden");$("mpLobbyView").classList.add("mp-hidden")}
-function mpShowLobby(){if(!mpAccount){$("mpAuthView").classList.remove("mp-hidden");$("mpLobbyView").classList.add("mp-hidden");return toast("Crie sua conta primeiro.")}$("mpAuthView").classList.add("mp-hidden");$("mpLobbyView").classList.remove("mp-hidden");mpRenderLobby()}
-async function mpCreateRoom(){if(!mpAccount)return mpBackAuth();let name=$("mpRoomName").value.trim()||"Liga dos Amigos";mpRoom={id:"r_"+Date.now().toString(36),code:mpCode(),name,hostId:mpAccount.id,createdAt:new Date().toISOString(),status:"lobby",season:seasonLabel(),players:[{userId:mpAccount.id,name:mpAccount.name,club:null,host:true}],settings:{maxPlayers:20,sharedLeague:true}};mpSelectedClub=null;await UFMOnlineAdapter.createRoom(mpRoom);await UFMOnlineAdapter.pushSnapshot(mpRoom.code,mpCareerSnapshot());mpRenderLobby();toast("Sala criada!")}
-async function mpJoinRoom(){if(!mpAccount)return mpBackAuth();let code=$("mpJoinCode").value.trim().toUpperCase();if(!code)return toast("Digite o código da sala.");let room=await UFMOnlineAdapter.getRoom(code);if(!room)return toast("Sala não encontrada neste aparelho. O backend online entra na próxima etapa.");if(!room.players.some(x=>x.userId===mpAccount.id))room.players.push({userId:mpAccount.id,name:mpAccount.name,club:null,host:false});mpRoom=room;await UFMOnlineAdapter.saveRoom(room);mpSelectedClub=room.players.find(x=>x.userId===mpAccount.id)?.club||null;mpRenderLobby();toast("Você entrou na sala!")}
-async function mpLeaveRoom(){if(mpRoom&&mpAccount){mpRoom.players=(mpRoom.players||[]).filter(x=>x.userId!==mpAccount.id);if(mpRoom.players.length&&mpRoom.hostId===mpAccount.id){mpRoom.hostId=mpRoom.players[0].userId;mpRoom.players[0].host=true}await UFMOnlineAdapter.saveRoom(mpRoom)}mpRoom=null;mpSelectedClub=null;localStorage.removeItem(MP_ROOM_KEY);mpRenderLobby()}
+function mpShowLobby(){if(!mpAccount){$("mpAuthView").classList.remove("mp-hidden");$("mpLobbyView").classList.add("mp-hidden");return toast("Crie seu treinador primeiro.")}$("mpAuthView").classList.add("mp-hidden");$("mpLobbyView").classList.remove("mp-hidden");mpRenderLobby()}
+async function mpCreateRoom(){try{if(!mpAccount)return mpBackAuth();if(!mpConfigured())throw new Error("SUPABASE_NOT_CONFIGURED");let name=$("mpRoomName").value.trim()||"Liga dos Amigos";let tries=0;do{mpRoom={id:"r_"+Date.now().toString(36),code:mpCode(),name,hostId:mpAccount.id,createdAt:new Date().toISOString(),status:"lobby",season:seasonLabel(),players:[{userId:mpAccount.id,name:mpAccount.name,club:null,host:true}],settings:{maxPlayers:20,sharedLeague:true}};tries++;try{await UFMOnlineAdapter.createRoom(mpRoom);break}catch(e){if(tries>=4)throw e}}while(true);mpSelectedClub=null;await UFMOnlineAdapter.pushSnapshot(mpRoom.code,mpCareerSnapshot());mpRenderLobby();mpStartPolling();toast("Sala online criada!")}catch(e){mpOnlineError(e)}}
+async function mpJoinRoom(){try{if(!mpAccount)return mpBackAuth();let code=$("mpJoinCode").value.trim().toUpperCase();if(!code)return toast("Digite o código da sala.");let room=await UFMOnlineAdapter.getRoom(code);if(!room)return toast("Sala não encontrada. Confira o código.");if((room.players||[]).length>=Number(room.settings?.maxPlayers||20)&&!room.players.some(x=>x.userId===mpAccount.id))return toast("Essa sala está cheia.");if(!room.players.some(x=>x.userId===mpAccount.id))room.players.push({userId:mpAccount.id,name:mpAccount.name,club:null,host:false});mpRoom=room;await UFMOnlineAdapter.saveRoom(room);mpSelectedClub=room.players.find(x=>x.userId===mpAccount.id)?.club||null;mpRenderLobby();mpStartPolling();toast("Você entrou na sala online!")}catch(e){mpOnlineError(e)}}
+async function mpLeaveRoom(){try{if(mpRoom&&mpAccount){let latest=await UFMOnlineAdapter.getRoom(mpRoom.code)||mpRoom;latest.players=(latest.players||[]).filter(x=>x.userId!==mpAccount.id);if(latest.players.length&&latest.hostId===mpAccount.id){latest.hostId=latest.players[0].userId;latest.players.forEach((p,i)=>p.host=i===0)}await UFMOnlineAdapter.saveRoom(latest)}clearInterval(mpPollTimer);mpPollTimer=null;mpRoom=null;mpSelectedClub=null;localStorage.removeItem(MP_ROOM_KEY);mpRenderLobby()}catch(e){mpOnlineError(e)}}
 function mpAvailableClubs(){let arr=[];try{arr=[...(serieAClubs||[]),...(serieBClubs||[])]}catch(e){}return [...new Set(arr)].filter(Boolean).slice(0,40)}
-async function mpChooseClub(club){if(!mpRoom||!mpAccount)return;let taken=mpRoom.players.some(x=>x.club===club&&x.userId!==mpAccount.id);if(taken)return toast("Esse clube já tem treinador.");let me=mpRoom.players.find(x=>x.userId===mpAccount.id);if(!me)return;me.club=club;mpSelectedClub=club;await UFMOnlineAdapter.saveRoom(mpRoom);mpRenderLobby();toast(`${club} selecionado!`)}
-function mpRenderLobby(){let no=$("mpNoRoom"),info=$("mpRoomInfo"),playersEl=$("mpPlayers"),grid=$("mpClubGrid"),start=$("mpStartBtn");if(!no)return;if(mpRoom){no.classList.add("mp-hidden");info.classList.remove("mp-hidden");$("mpRoomCode").textContent=mpRoom.code;$("mpRoomStatus").textContent="● Lobby local • backend pendente";playersEl.innerHTML=(mpRoom.players||[]).map(p=>`<div class="mp-player"><div><b>${mpEsc(p.name)}</b><div class="mp-note">${mpEsc(p.club||"Clube não escolhido")}</div></div>${p.userId===mpRoom.hostId?'<span class="mp-badge">HOST</span>':''}</div>`).join("")||'<p class="mp-note">Nenhum jogador.</p>';let taken=new Set((mpRoom.players||[]).filter(x=>x.userId!==mpAccount?.id).map(x=>x.club));grid.innerHTML=mpAvailableClubs().map(c=>`<button class="mp-club ${c===mpSelectedClub?'selected':''} ${taken.has(c)?'taken':''}" ${taken.has(c)?'disabled':''} onclick="mpChooseClub('${String(c).replace(/'/g,"\\'")}')">${mpEsc(c)}${taken.has(c)?" • ocupado":""}</button>`).join("");start.disabled=!mpSelectedClub}else{no.classList.remove("mp-hidden");info.classList.add("mp-hidden");playersEl.innerHTML='<p class="mp-note">Crie uma sala ou entre usando um código.</p>';grid.innerHTML='<div class="mp-note">Os clubes aparecem depois que você entra em uma sala.</div>';start.disabled=true}}
+async function mpChooseClub(club){try{if(!mpRoom||!mpAccount)return;let latest=await UFMOnlineAdapter.getRoom(mpRoom.code)||mpRoom;let taken=latest.players.some(x=>x.club===club&&x.userId!==mpAccount.id);if(taken)return toast("Esse clube já tem treinador.");let me=latest.players.find(x=>x.userId===mpAccount.id);if(!me)return;me.club=club;mpSelectedClub=club;mpRoom=await UFMOnlineAdapter.saveRoom(latest);mpRenderLobby();toast(`${club} selecionado!`)}catch(e){mpOnlineError(e)}}
+function mpRenderLobby(){let no=$("mpNoRoom"),info=$("mpRoomInfo"),playersEl=$("mpPlayers"),grid=$("mpClubGrid"),start=$("mpStartBtn");if(!no)return;if(mpRoom){no.classList.add("mp-hidden");info.classList.remove("mp-hidden");$("mpRoomCode").textContent=mpRoom.code;let online=mpConfigured();$("mpRoomStatus").textContent=online?"● Online • sincronizado":"● Supabase não configurado";$("mpRoomStatus").classList.toggle("offline",!online);playersEl.innerHTML=(mpRoom.players||[]).map(p=>`<div class="mp-player"><div><b>${mpEsc(p.name)}</b><div class="mp-note">${mpEsc(p.club||"Clube não escolhido")}</div></div>${p.userId===mpRoom.hostId?'<span class="mp-badge">HOST</span>':''}</div>`).join("")||'<p class="mp-note">Nenhum jogador.</p>';let taken=new Set((mpRoom.players||[]).filter(x=>x.userId!==mpAccount?.id).map(x=>x.club));grid.innerHTML=mpAvailableClubs().map(c=>`<button class="mp-club ${c===mpSelectedClub?'selected':''} ${taken.has(c)?'taken':''}" ${taken.has(c)?'disabled':''} onclick="mpChooseClub('${String(c).replace(/'/g,"\\'")}')">${mpEsc(c)}${taken.has(c)?" • ocupado":""}</button>`).join("");start.disabled=!mpSelectedClub}else{no.classList.remove("mp-hidden");info.classList.add("mp-hidden");playersEl.innerHTML='<p class="mp-note">Crie uma sala ou entre usando um código.</p>';grid.innerHTML='<div class="mp-note">Os clubes aparecem depois que você entra em uma sala.</div>';start.disabled=true}}
+async function mpRefreshRoom(){if(!mpRoom||!mpConfigured())return;try{let latest=await UFMOnlineAdapter.getRoom(mpRoom.code);if(!latest)return;mpRoom=latest;localStorage.setItem(MP_ROOM_KEY,JSON.stringify(latest));mpSelectedClub=latest.players?.find(x=>x.userId===mpAccount?.id)?.club||mpSelectedClub;mpRenderLobby()}catch(e){console.warn("mp poll",e)}}
+function mpStartPolling(){clearInterval(mpPollTimer);if(!mpRoom||!mpConfigured())return;mpPollTimer=setInterval(mpRefreshRoom,2500)}
 async function mpCopyCode(){if(!mpRoom)return;try{await navigator.clipboard.writeText(mpRoom.code);toast("Código copiado!")}catch(e){prompt("Código da sala:",mpRoom.code)}}
-async function mpStartLeague(){if(!mpRoom||!mpSelectedClub)return toast("Escolha seu clube.");mpRoom.status="playing";mpRoom.updatedAt=new Date().toISOString();await UFMOnlineAdapter.saveRoom(mpRoom);await UFMOnlineAdapter.pushSnapshot(mpRoom.code,mpCareerSnapshot());localStorage.setItem("ufm9_mp_welcome_seen","1");$("mpEntry").classList.remove("open");toast(`Liga compartilhada aberta • ${mpSelectedClub}`);let s=$("autosaveStatus");if(s)s.textContent=`🌐 Sala ${mpRoom.code} • ${mpSelectedClub}`}
-async function mpSyncNow(){if(!mpRoom||mpRoom.status!=="playing")return;await UFMOnlineAdapter.pushSnapshot(mpRoom.code,mpCareerSnapshot())}
-const mpOriginalSave=save;save=function(silent=false){mpOriginalSave(silent);if(mpRoom?.status==="playing")clearTimeout(window.__mpSyncTimer),window.__mpSyncTimer=setTimeout(()=>mpSyncNow(),800)};
+async function mpStartLeague(){try{if(!mpRoom||!mpSelectedClub)return toast("Escolha seu clube.");let latest=await UFMOnlineAdapter.getRoom(mpRoom.code)||mpRoom;if(latest.hostId===mpAccount.id){latest.status="playing";latest.startedAt=latest.startedAt||new Date().toISOString();await UFMOnlineAdapter.saveRoom(latest)}mpRoom=latest;await UFMOnlineAdapter.pushSnapshot(mpRoom.code,mpCareerSnapshot());localStorage.setItem("ufm9_mp_welcome_seen","1");$("mpEntry").classList.remove("open");toast(`Liga online aberta • ${mpSelectedClub}`);let s=$("autosaveStatus");if(s)s.textContent=`🌐 Sala ${mpRoom.code} • ${mpSelectedClub}`;}catch(e){mpOnlineError(e)}}
+async function mpSyncNow(){if(!mpRoom||!mpConfigured())return;try{await UFMOnlineAdapter.pushSnapshot(mpRoom.code,mpCareerSnapshot())}catch(e){console.warn("mp sync",e)}}
+const mpOriginalSave=save;save=function(silent=false){mpOriginalSave(silent);if(mpRoom?.status==="playing"&&mpConfigured()){clearTimeout(window.__mpSyncTimer);window.__mpSyncTimer=setTimeout(()=>mpSyncNow(),1200)}};
 setTimeout(mpInit,0);
 
 </script></body></html>
