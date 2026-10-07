@@ -156,6 +156,15 @@ linear-gradient(145deg,#06110b,#081b11 52%,#050806);color:#f4fff7;font-family:in
 @media(max-width:720px){.calendar-game-v127{grid-template-columns:75px 1fr}.calendar-game-v127 .clubs{grid-column:1/-1}}
 </style>
 
+
+<meta name="theme-color" content="#07130d">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="UFM">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/ufm-icon.svg" type="image/svg+xml">
+
 </head><body>
 <div id="ufmLanding">
  <header class="site-nav">
@@ -5253,6 +5262,28 @@ document.addEventListener('click',e=>{if(e.target?.closest?.('button'))setTimeou
 window.addEventListener('pagehide',()=>queue('saída'));
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')queue('segundo plano')});
 window.UFMAccounts1852={load,save,queue,key};
+})();
+</script>
+
+
+<script>
+// ===== UFM APP V18.5.2 • PWA / ATUALIZAÇÃO AUTOMÁTICA =====
+(function(){
+  window.UFM_APP_VERSION='18.5.2';
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', async ()=>{
+      try{
+        const reg=await navigator.serviceWorker.register('./sw.js',{scope:'./'});
+        // Busca nova versão sempre que o jogo abre.
+        reg.update().catch(()=>{});
+        navigator.serviceWorker.addEventListener('controllerchange',()=>{
+          if(sessionStorage.getItem('ufm-sw-reloaded')) return;
+          sessionStorage.setItem('ufm-sw-reloaded','1');
+          location.reload();
+        });
+      }catch(e){ console.warn('UFM PWA:',e); }
+    });
+  }
 })();
 </script>
 
