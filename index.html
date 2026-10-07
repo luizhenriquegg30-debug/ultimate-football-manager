@@ -5267,9 +5267,9 @@ window.UFMAccounts1852={load,save,queue,key};
 
 
 <script>
-// ===== UFM APP V18.5.2 • PWA / ATUALIZAÇÃO AUTOMÁTICA =====
+// ===== UFM APP V18.6 • PWA / ATUALIZAÇÃO AUTOMÁTICA =====
 (function(){
-  window.UFM_APP_VERSION='18.5.2';
+  window.UFM_APP_VERSION='18.6';
   if('serviceWorker' in navigator){
     window.addEventListener('load', async ()=>{
       try{
@@ -5284,6 +5284,83 @@ window.UFMAccounts1852={load,save,queue,key};
       }catch(e){ console.warn('UFM PWA:',e); }
     });
   }
+})();
+</script>
+
+
+<script>
+// ===== UFM V18.6 • MATA-MATA INTERNACIONAL + BONUS GLOBAL 10B =====
+(function(){
+'use strict';
+const BONUS=10000000000, BONUS_KEY='global10B_v186';
+function persist186(reason){
+ try{localStorage.setItem('ufmOnlineV1',JSON.stringify(career))}catch(e){}
+ try{window.scheduleCloudSave?.(reason||'V18.6')}catch(e){}
+}
+function grant10B(){
+ if(!window.career?.club||career?.rewardsV186?.[BONUS_KEY])return false;
+ career.finance=career.finance||{cash:0,income:0,expenses:0};
+ career.finance.cash=Number(career.finance.cash||0)+BONUS;
+ career.rewardsV186=career.rewardsV186||{};
+ career.rewardsV186[BONUS_KEY]={amount:BONUS,grantedAt:Date.now()};
+ try{if(typeof addLedger==='function')addLedger('🎁 Bônus UFM V18.6',BONUS)}catch(e){}
+ persist186('bônus global R$ 10 bilhões');
+ try{toast('🎁 Bônus de R$ 10 bilhões adicionado ao caixa!')}catch(e){}
+ return true;
+}
+function forceAIGroupRound(comp,ri){
+ for(const g of comp?.groups||[])for(const f of g.rounds?.[ri]||[]){
+  if(f.played||f.home===career.club||f.away===career.club)continue;
+  let sc=score(strength(f.home),strength(f.away));applyGroup(g,f,sc[0],sc[1]);
+ }
+}
+function repairGroups(comp){
+ if(!comp||comp.phase!=='GROUPS')return false;
+ const ug=userGroup(comp), userGames=ug?userGroupGames(comp):[];
+ const userFinished=!ug||userGames.every(x=>x.fixture.played);
+ const current=Number(career?.season?.round||1);
+ // Fecha cada rodada da IA já alcançada no calendário.
+ for(let i=0;i<6;i++)if((comp.dates?.[i]||999)<=current||userFinished)forceAIGroupRound(comp,i);
+ // Se o usuário terminou sua fase, não deixa nenhum resultado da IA bloquear as oitavas.
+ if(userFinished){for(let i=0;i<6;i++)forceAIGroupRound(comp,i)}
+ const before=comp.phase;finishGroupsIfReady(comp);
+ return before!==comp.phase;
+}
+function repairKO(comp){
+ if(!comp||comp.phase==='GROUPS'||comp.phase==='DONE'||!comp.knockout)return false;
+ const current=Number(career?.season?.round||1), date=koDate(comp);
+ // Se o clube foi eliminado (ou nem participa desta chave) e a data chegou, a IA continua o torneio.
+ const userAlive=comp.knockout.games.some(x=>!x.played&&(x.home===career.club||x.away===career.club));
+ if(!userAlive&&current>=date){
+  for(const x of comp.knockout.games.filter(x=>!x.played)){
+   let sc=score(strength(x.home),strength(x.away));if(sc[0]===sc[1])sc[Math.random()<.5?0:1]++;
+   x.played=true;x.hg=sc[0];x.ag=sc[1];x.winner=sc[0]>sc[1]?x.home:x.away;
+  }
+  advanceKO(comp);return true;
+ }
+ return false;
+}
+function repairInternational(){
+ if(!career?.club)return;
+ let changed=false;
+ try{
+  const all=ensureV15();
+  for(const comp of [all?.america,all?.sul]){
+   if(repairGroups(comp))changed=true;
+   // Pode avançar fases da IA que já venceram no calendário.
+   let guard=0;while(repairKO(comp)&&guard++<5)changed=true;
+  }
+ }catch(e){console.warn('UFM V18.6 continental repair',e)}
+ if(changed)persist186('avanço mata-mata internacional');
+}
+function afterLoad(){if(!career?.club)return;grant10B();repairInternational();}
+// Executa após login/carregamento e também ao avançar a carreira.
+setInterval(afterLoad,1800);
+window.addEventListener('load',()=>setTimeout(afterLoad,1600));
+document.addEventListener('click',e=>{if(e.target?.closest?.('button'))setTimeout(repairInternational,120)},true);
+const oldDue=window.dueContinental;
+if(typeof oldDue==='function')window.dueContinental=function(){repairInternational();return oldDue.apply(this,arguments)};
+window.UFMV186={grant10B,repairInternational};
 })();
 </script>
 
