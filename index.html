@@ -1,0 +1,1081 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ultimate Football Manager • UFM CLEAN CORE 1.0</title>
+<style>
+:root{--bg:#050a08;--panel:#0c1712;--panel2:#12231a;--line:#254332;--green:#59e58b;--text:#f2fff7;--muted:#91a99b;--gold:#ffd166;--red:#ff6b76;--blue:#63a9ff;--kit:#25a55d;--kit2:#fff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#1b4931 0,#07100b 38%,#040806 80%);color:var(--text);font:14px Inter,system-ui,Segoe UI,Arial,sans-serif;min-height:100vh}button,input,select{font:inherit}.hidden{display:none!important}.muted{color:var(--muted)}.btn{border:0;border-radius:11px;padding:11px 15px;background:var(--green);color:#052112;font-weight:900;cursor:pointer}.btn.alt{background:#172a20;color:#fff;border:1px solid var(--line)}.btn:disabled{opacity:.45}.landing{min-height:100vh;display:grid;place-items:center;padding:25px}.hero{width:min(1100px,100%);display:grid;grid-template-columns:1.1fr .9fr;gap:22px}.hero-card,.card{background:linear-gradient(145deg,#0f2017dd,#08120ddd);border:1px solid var(--line);border-radius:22px;box-shadow:0 30px 90px #0008}.hero-copy{padding:48px}.brand{font-weight:1000;letter-spacing:-1px;font-size:22px}.brand span{color:var(--green)}h1{font-size:clamp(38px,6vw,72px);line-height:.95;margin:28px 0 20px;letter-spacing:-3px}.hero-copy p{font-size:17px;line-height:1.6;max-width:640px}.features{display:flex;gap:8px;flex-wrap:wrap;margin:25px 0}.chip{padding:8px 10px;border-radius:999px;background:#10291c;border:1px solid #2b6041;color:#a9e9bd;font-size:11px;font-weight:850}.hero-side{padding:22px;display:grid;align-content:center}.pitch{position:relative;aspect-ratio:105/68;background:repeating-linear-gradient(90deg,#157943 0 10%,#19894c 10% 20%);border:3px solid #dfffea;border-radius:15px;overflow:hidden;box-shadow:inset 0 0 45px #00170a88}.pitch:before{content:"";position:absolute;left:50%;top:0;height:100%;border-left:2px solid #ffffffaa}.pitch:after{content:"";position:absolute;left:50%;top:50%;width:19%;aspect-ratio:1;border:2px solid #ffffffaa;border-radius:50%;transform:translate(-50%,-50%)}.dot{position:absolute;width:18px;height:18px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid #fff;box-shadow:0 3px 8px #0008}.home{background:var(--green)}.away{background:var(--blue)}.ball{width:10px;height:10px;background:#fff}.wizard{min-height:100vh;padding:28px;display:grid;place-items:center}.wizard-shell{width:min(960px,100%)}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:12px}.step{height:6px;border-radius:10px;background:#193025}.step.on{background:var(--green)}.wizard-card{padding:30px}.wizard-card h2{font-size:29px;margin:0 0 7px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:23px}.field{display:grid;gap:7px}.field label{font-size:11px;color:var(--muted);font-weight:900;text-transform:uppercase}.field input,.field select{width:100%;background:#08130e;border:1px solid #31523f;color:#fff;padding:12px;border-radius:10px;outline:0}.field input:focus,.field select:focus{border-color:var(--green)}.wizard-actions{display:flex;justify-content:space-between;gap:10px;margin-top:25px}.country-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}.choice{padding:15px;background:#091610;border:1px solid var(--line);border-radius:13px;cursor:pointer}.choice.active{border-color:var(--green);box-shadow:0 0 0 2px #59e58b22}.choice b{display:block;font-size:15px;margin-bottom:4px}.kit-builder{display:grid;grid-template-columns:250px 1fr;gap:22px;margin-top:20px}.shirt-wrap{display:grid;place-items:center;min-height:270px;background:radial-gradient(circle,#173d29,#07110c 70%);border-radius:16px}.shirt{width:150px;height:185px;clip-path:polygon(22% 0,39% 8%,61% 8%,78% 0,100% 17%,87% 39%,77% 31%,77% 100%,23% 100%,23% 31%,13% 39%,0 17%);background:linear-gradient(90deg,var(--kit) 0 50%,var(--kit2) 50%);position:relative;filter:drop-shadow(0 12px 14px #0008)}.shirt:after{content:attr(data-name);position:absolute;top:76px;left:24px;right:24px;background:#06100bd9;padding:7px;text-align:center;font-size:10px;font-weight:1000;white-space:nowrap;overflow:hidden}.app{display:grid;grid-template-columns:235px 1fr;min-height:100vh}.sidebar{padding:18px 12px;background:#07110d;border-right:1px solid var(--line);position:sticky;top:0;height:100vh}.club-mini{padding:13px;background:#0d1d15;border:1px solid var(--line);border-radius:14px;margin:18px 0}.crest{width:46px;height:46px;border-radius:13px;background:var(--kit);display:grid;place-items:center;color:#fff;font-weight:1000;margin-bottom:8px;border:2px solid #ffffff33}.nav{display:grid;gap:4px}.nav button{border:0;background:transparent;color:var(--muted);padding:11px;border-radius:9px;text-align:left;font-weight:800;cursor:pointer}.nav button.active,.nav button:hover{background:#14271d;color:#fff}.online-pill{margin-top:15px;padding:10px;border:1px solid #28623f;background:#0d2718;border-radius:11px;color:#8eecaa;font-size:11px}.main{padding:25px;max-width:1500px;width:100%;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.topbar h2{margin:0;font-size:27px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{border-radius:16px;padding:17px}.stat{grid-column:span 3}.wide{grid-column:span 8}.side{grid-column:span 4}.full{grid-column:1/-1}.stat span{color:var(--muted);font-size:11px}.stat b{display:block;font-size:23px;margin-top:5px}.match-card{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;text-align:center;gap:15px;padding:25px}.club-big{font-size:18px;font-weight:950}.vs{font-size:30px;font-weight:1000}.live{color:var(--green);font-size:11px;font-weight:900}.activity{display:grid;gap:8px}.activity-item{padding:10px;background:#09150f;border:1px solid #1c3427;border-radius:9px}.activity-item b{font-size:12px}.activity-item small{display:block;color:var(--muted);margin-top:3px}.friend{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.friend-status{width:8px;height:8px;background:var(--green);border-radius:50%;display:inline-block;margin-right:6px}.page{display:none}.page.active{display:block}.coming{min-height:330px;display:grid;place-items:center;text-align:center}.coming b{font-size:24px}.toast{position:fixed;right:18px;bottom:18px;padding:12px 15px;border-radius:10px;background:#fff;color:#07140d;font-weight:900;display:none;z-index:100}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.hero-side{display:none}.hero-copy{padding:30px}.form-grid,.kit-builder{grid-template-columns:1fr}.country-grid{grid-template-columns:1fr 1fr}.app{display:block}.sidebar{height:auto;position:sticky;z-index:10;padding:8px}.sidebar .brand,.club-mini,.online-pill{display:none}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap}.main{padding:13px}.stat{grid-column:span 6}.wide,.side{grid-column:1/-1}}
+
+.player-row.selectable{cursor:pointer}.player-row.selectable:hover{background:rgba(59,130,246,.08)}.player-row.selected{outline:2px solid #38bdf8;outline-offset:-2px;background:rgba(56,189,248,.12)}.swap-help{padding:12px 14px;margin-bottom:12px;border:1px solid rgba(56,189,248,.3);border-radius:12px;background:rgba(56,189,248,.08);font-size:13px}.swap-btn{border:0;border-radius:8px;padding:7px 10px;font-weight:800;cursor:pointer;background:#2563eb;color:white}.swap-btn:disabled{opacity:.35;cursor:not-allowed}.mini-player.swap-card{cursor:pointer;border:1px solid transparent}.mini-player.swap-card:hover{border-color:#38bdf8}.mini-player.swap-card.selected{border-color:#38bdf8;background:rgba(56,189,248,.12)}
+
+.tactics-roster{margin-top:14px}.roster-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.roster-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.roster-card{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;background:#09150f;border:1px solid var(--line);border-radius:11px;cursor:pointer}.roster-card:hover,.roster-card.selected{border-color:#38bdf8;background:rgba(56,189,248,.10)}.roster-card .meta{font-size:10px;color:var(--muted);margin-top:3px}.roster-card .rating{font-size:18px;font-weight:1000}.roster-section-title{font-size:11px;color:var(--muted);font-weight:950;letter-spacing:.5px;margin:14px 0 7px}.slot{cursor:pointer}.slot.selected .slot-dot{outline:3px solid #38bdf8;outline-offset:2px}.tactic-tip{padding:11px 12px;border:1px solid rgba(56,189,248,.3);border-radius:11px;background:rgba(56,189,248,.08);font-size:12px;margin:10px 0 14px}@media(max-width:900px){.roster-grid{grid-template-columns:1fr}}
+
+/* V3 MATCH ENGINE */
+.match2d-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px}.match2d-score{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;text-align:center;margin-bottom:12px}.score-team{font-size:16px;font-weight:950}.score-num{font-size:34px;font-weight:1000}.match-clock{font-size:13px;color:var(--gold);font-weight:900}.match2d-pitch{position:relative;aspect-ratio:105/68;background:repeating-linear-gradient(90deg,#157943 0 10%,#19894c 10% 20%);border:3px solid #dfffea;border-radius:15px;overflow:hidden;box-shadow:inset 0 0 55px #00170aaa}.match2d-pitch:before{content:"";position:absolute;left:50%;top:0;height:100%;border-left:2px solid #ffffffaa}.match2d-pitch:after{content:"";position:absolute;left:50%;top:50%;width:18%;aspect-ratio:1;border:2px solid #ffffffaa;border-radius:50%;transform:translate(-50%,-50%)}.field-box{position:absolute;top:25%;width:16%;height:50%;border:2px solid #ffffffaa}.field-box.left{left:-2px}.field-box.right{right:-2px}.sim-player{position:absolute;width:26px;height:26px;border-radius:50%;transform:translate(-50%,-50%);display:grid;place-items:center;border:2px solid #fff;font-size:8px;font-weight:1000;box-shadow:0 3px 8px #0009;transition:left .32s linear,top .32s linear;z-index:3}.sim-player.home-side{background:var(--kit)}.sim-player.away-side{background:#2b64ad}.sim-player .pname{position:absolute;top:27px;left:50%;transform:translateX(-50%);font-size:8px;background:#06100bd9;padding:2px 4px;border-radius:4px;white-space:nowrap;color:#fff}.sim-ball{position:absolute;width:11px;height:11px;border-radius:50%;background:#fff;border:1px solid #222;transform:translate(-50%,-50%);z-index:5;box-shadow:0 2px 5px #000;transition:left .22s linear,top .22s linear}.match-feed{height:320px;overflow:auto;display:flex;flex-direction:column;gap:7px}.match-event{padding:8px 9px;border-radius:8px;background:#09150f;border:1px solid #1c3427;font-size:12px}.match-event.goal{border-color:#ffd166;color:#ffe6a3}.match-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.possession{display:flex;height:9px;border-radius:20px;overflow:hidden;background:#193025;margin:8px 0}.possession i{display:block;background:var(--kit);height:100%}.match-state{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.match-state div{background:#09150f;border:1px solid var(--line);border-radius:9px;padding:8px;text-align:center}.match-state b{display:block;font-size:16px}@media(max-width:950px){.match2d-layout{grid-template-columns:1fr}.match-feed{height:220px}}
+
+.match-manager{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.match-manager-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.match-control{display:grid;gap:6px}.match-control label{font-size:11px;color:var(--muted);font-weight:900}
+.match-control select{width:100%;background:#09150f;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px}
+.match-subs{display:grid;grid-template-columns:1fr auto 1fr;gap:9px;align-items:end;margin-top:12px}
+.match-subs select{width:100%;background:#09150f;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px}
+.match-sub-count{font-size:12px;color:var(--muted);margin-top:8px}
+.match-strength{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.match-strength div{background:#09150f;border:1px solid var(--line);border-radius:9px;padding:9px;text-align:center}
+.match-strength small{display:block;color:var(--muted);font-size:10px}.match-strength b{font-size:15px}
+@media(max-width:720px){.match-manager-grid,.match-subs{grid-template-columns:1fr}.match-strength{grid-template-columns:1fr 1fr 1fr}}
+
+.attr-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}.attr-pill{font-size:9px;padding:3px 6px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:#09150f}
+.player-impact{font-size:10px;color:var(--muted)}
+.season-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:14px}.standings{width:100%;border-collapse:collapse}.standings th,.standings td{padding:9px 7px;border-bottom:1px solid var(--line);text-align:center;font-size:12px}.standings th{color:var(--muted);font-size:10px}.standings th:nth-child(2),.standings td:nth-child(2){text-align:left}.standings tr.me{background:#153522}.round-list{display:grid;gap:7px}.fixture{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:10px;background:#09150f;border:1px solid var(--line);border-radius:10px}.fixture.current{border-color:var(--green)}.fixture.done{opacity:.75}.fixture .round{font-size:10px;color:var(--muted);font-weight:900}.fixture .result{font-weight:1000}.season-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.season-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.season-kpis div{padding:10px;text-align:center;background:#09150f;border:1px solid var(--line);border-radius:10px}.season-kpis small{display:block;color:var(--muted);font-size:9px}.season-kpis b{font-size:18px}@media(max-width:900px){.season-grid{grid-template-columns:1fr}.season-kpis{grid-template-columns:repeat(2,1fr)}}
+.season-badge{font-size:9px;font-weight:950;padding:4px 7px;border-radius:999px;background:#17281f}
+.champion-box{padding:14px;border:1px solid var(--gold);border-radius:12px;background:#2a230e;margin-top:12px}
+.history-round{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.history-game{display:flex;justify-content:space-between;gap:8px;padding:6px 0;font-size:11px}
+
+/* V4.2 MERCADO + FINANÇAS */
+.market-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(290px,.6fr);gap:14px}.market-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.market-toolbar input,.market-toolbar select{background:#09150f;color:#fff;border:1px solid var(--line);border-radius:9px;padding:10px;min-width:140px}.market-player{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:11px;background:#09150f;border:1px solid var(--line);border-radius:11px;margin-bottom:8px}.market-player .attrs{font-size:10px;color:var(--muted);margin-top:4px}.market-price{text-align:right}.market-price b{display:block}.finance-kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px}.finance-kpis div{background:#09150f;border:1px solid var(--line);border-radius:10px;padding:10px}.finance-kpis small{display:block;color:var(--muted);font-size:9px}.finance-kpis b{font-size:16px}.ledger{display:grid;gap:7px;margin-top:12px}.ledger-item{display:flex;justify-content:space-between;gap:8px;padding:8px;border-bottom:1px solid var(--line);font-size:11px}.sell-list{max-height:360px;overflow:auto}@media(max-width:900px){.market-layout{grid-template-columns:1fr}.market-player{grid-template-columns:1fr auto}.market-player button{grid-column:1/-1}}
+
+/* V4.3 ESTRUTURA DO CLUBE */
+.club-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.stadium-visual{position:relative;min-height:290px;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at center,#218a4e 0 25%,#126338 26% 37%,#16231c 38% 55%,#080d0a 56%);border:1px solid var(--line);display:grid;place-items:center}.stadium-field{width:52%;aspect-ratio:1.55;background:repeating-linear-gradient(90deg,#19894c 0 10%,#157943 10% 20%);border:2px solid #dfffea;position:relative;box-shadow:0 0 40px #0008}.stadium-field:before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1px solid #fff}.stadium-field:after{content:"";position:absolute;left:50%;top:50%;width:20%;aspect-ratio:1;border:1px solid #fff;border-radius:50%;transform:translate(-50%,-50%)}.stadium-name{position:absolute;top:18px;left:18px;background:#06100bd9;border:1px solid var(--line);padding:9px 12px;border-radius:10px;font-weight:1000}.stadium-cap{position:absolute;bottom:16px;right:16px;background:#06100bd9;padding:8px 11px;border-radius:9px}.facility-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.facility{padding:13px;background:#09150f;border:1px solid var(--line);border-radius:12px}.facility-head{display:flex;justify-content:space-between;gap:8px}.level-dots{display:flex;gap:4px;margin:8px 0}.level-dots i{width:18px;height:5px;border-radius:10px;background:#1a3024}.level-dots i.on{background:var(--green)}.academy-player{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px;border-bottom:1px solid var(--line)}@media(max-width:900px){.club-layout{grid-template-columns:1fr}.facility-grid{grid-template-columns:1fr}}
+
+/* V4.4 OLHEIROS + DESENVOLVIMENTO */
+.scout-layout{display:grid;grid-template-columns:1fr 1fr;gap:14px}.scout-card{padding:12px;background:#09150f;border:1px solid var(--line);border-radius:12px;margin-bottom:8px}.rarity{display:inline-block;padding:4px 8px;border-radius:999px;font-size:9px;font-weight:1000;background:#17281f}.rarity-A{color:#ffd166;border:1px solid #ffd166}.rarity-B{color:#63a9ff;border:1px solid #63a9ff}.rarity-C{color:#59e58b;border:1px solid #59e58b}.rarity-D,.rarity-E,.rarity-F{color:var(--muted);border:1px solid var(--line)}.dev-player{display:grid;grid-template-columns:1fr auto;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}.dev-up{color:var(--green);font-weight:1000}.training-box{padding:12px;background:#09150f;border:1px solid var(--line);border-radius:12px;margin-bottom:10px}.training-box select{width:100%;margin-top:7px;background:#0d1d15;color:#fff;border:1px solid #31523f;border-radius:8px;padding:9px}@media(max-width:900px){.scout-layout{grid-template-columns:1fr}}
+
+/* V5 CARREIRA DINÂMICA */
+.career-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:12px 0}.career-kpi{background:#09150f;border:1px solid var(--line);border-radius:11px;padding:11px}.career-kpi small{display:block;color:var(--muted);font-size:9px}.career-kpi b{font-size:16px}.board-objective{padding:11px;background:#09150f;border:1px solid var(--line);border-radius:11px;margin:8px 0}.progress{height:7px;background:#17251d;border-radius:10px;overflow:hidden;margin-top:7px}.progress i{display:block;height:100%;background:var(--green);border-radius:10px}.contract-warn{color:#ffd166}.injured{color:#ff7a7a}.season-award{padding:14px;border:1px solid var(--gold);background:#29220d;border-radius:12px;margin-top:12px}@media(max-width:760px){.career-grid{grid-template-columns:1fr 1fr}}
+
+/* V6 MULTIPLAYER BASE */
+.online-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}.online-profile{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px;background:#09150f;border:1px solid var(--line);border-radius:12px}.online-id{font-family:monospace;font-size:13px;color:#8fffc0}.room-code{font-size:28px;font-weight:1000;letter-spacing:5px;text-align:center;padding:16px;background:#07110c;border:1px dashed #4b7d60;border-radius:12px}.online-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.online-actions input{background:#09150f;color:#fff;border:1px solid var(--line);border-radius:9px;padding:11px;min-width:0}.online-status{padding:10px;border-radius:10px;background:#101c16;border:1px solid var(--line);margin-top:10px}.online-status.ready{border-color:#4acb7c}.online-log{max-height:260px;overflow:auto;display:grid;gap:6px}.online-log div{font-size:11px;padding:7px 9px;background:#09150f;border-radius:8px}.pvp-team{padding:12px;background:#09150f;border:1px solid var(--line);border-radius:12px}.pvp-vs{font-size:22px;font-weight:1000;text-align:center;margin:14px 0}.transport-note{font-size:10px;color:var(--muted);line-height:1.5}@media(max-width:850px){.online-grid{grid-template-columns:1fr}.online-actions{grid-template-columns:1fr}}
+
+/* V7 CONTAS */
+.auth-gate{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at top,#173425,#050a07 55%);display:none;align-items:center;justify-content:center;padding:18px}.auth-gate.show{display:flex}.auth-panel{width:min(460px,100%);background:#0b1710;border:1px solid #31523f;border-radius:18px;padding:22px;box-shadow:0 30px 90px #000b}.auth-panel h1{margin:0 0 4px}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:15px 0}.auth-panel input{width:100%;box-sizing:border-box;background:#07110c;color:#fff;border:1px solid #31523f;border-radius:9px;padding:11px;margin:5px 0}.auth-error{font-size:11px;color:#ff9292;min-height:18px;margin-top:8px}.account-chip{padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:#09150f;font-size:10px}.config-box{padding:11px;border:1px dashed #846d2d;background:#241f0e;border-radius:10px;margin-top:12px;font-size:10px;color:#e8d99c;line-height:1.5}
+
+/* ===== SITE OFICIAL UFM ===== */
+#ufmLanding{position:fixed;inset:0;z-index:10020;overflow:auto;background:
+radial-gradient(circle at 80% 10%,rgba(55,225,132,.16),transparent 28%),
+linear-gradient(145deg,#06110b,#081b11 52%,#050806);color:#f4fff7;font-family:inherit}
+.site-nav{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,6vw);border-bottom:1px solid #1d3c2a;background:rgba(5,13,8,.88);position:sticky;top:0;z-index:2;backdrop-filter:blur(12px)}
+.site-brand{font-size:22px;font-weight:950;letter-spacing:-.5px}.site-brand span{color:#55e68d}
+.site-actions{display:flex;gap:9px}.site-btn{border:1px solid #315b41;background:#102419;color:#fff;padding:11px 16px;border-radius:10px;font-weight:900;cursor:pointer}.site-btn.primary{background:#55e68d;color:#05200e;border-color:#55e68d}
+.site-hero{min-height:calc(100vh - 73px);display:grid;grid-template-columns:1.08fr .92fr;gap:42px;align-items:center;padding:55px max(24px,7vw)}
+.site-kicker{display:inline-block;border:1px solid #2f7047;background:#0b2114;color:#79eea5;padding:7px 11px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.8px}
+.site-hero h1{font-size:clamp(48px,7vw,92px);line-height:.91;letter-spacing:-4px;margin:18px 0 18px;max-width:780px}.site-hero h1 span{color:#55e68d}
+.site-lead{font-size:17px;color:#a9c5b2;line-height:1.65;max-width:650px}
+.site-cta{display:flex;gap:10px;flex-wrap:wrap;margin:27px 0}
+.site-note{font-size:11px;color:#769181}
+.site-card{background:linear-gradient(145deg,#0b1d12,#07120c);border:1px solid #285039;border-radius:24px;padding:22px;box-shadow:0 35px 90px #0009}
+.site-score{background:#06100a;border:1px solid #1d3928;border-radius:17px;padding:24px;text-align:center}.site-score small{color:#73907d}.site-score strong{display:block;font-size:42px;margin:12px 0}
+.site-feed{margin-top:13px;display:grid;gap:8px}.site-feed div{background:#0d2015;border:1px solid #1b3927;border-radius:10px;padding:10px 12px;font-size:11px;color:#a9c5b2}
+.site-features{padding:70px max(24px,7vw);border-top:1px solid #173323}.site-features h2{font-size:36px;margin:0 0 24px}.site-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.site-feature{background:#09170f;border:1px solid #1e402c;border-radius:16px;padding:20px}.site-feature b{display:block;font-size:16px;margin-bottom:8px}.site-feature p{font-size:12px;line-height:1.6;color:#8fa99a;margin:0}
+.site-footer{padding:25px max(24px,7vw);border-top:1px solid #173323;color:#65806f;font-size:10px;display:flex;justify-content:space-between;gap:12px}
+@media(max-width:820px){.site-hero{grid-template-columns:1fr;padding-top:35px}.site-hero h1{letter-spacing:-2px}.site-grid{grid-template-columns:1fr}.site-actions .site-btn:first-child{display:none}.site-card{margin-bottom:25px}}
+
+/* ===== V8: CAIXA DE ENTRADA + AMIGOS FIREBASE ===== */
+.inbox-badge{display:inline-grid;place-items:center;min-width:19px;height:19px;padding:0 5px;border-radius:99px;background:#ff6b76;color:white;font-size:9px;font-weight:1000;margin-left:5px}
+.social-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}.social-list{display:grid;gap:8px}.social-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px;background:#09150f;border:1px solid #1c3427;border-radius:11px}.social-row .meta{min-width:0}.social-row .meta b{display:block}.social-row .meta small{color:var(--muted)}.social-actions{display:flex;gap:6px;flex-wrap:wrap}.mail-item{padding:14px;border:1px solid #203d2d;border-radius:12px;background:#09150f;margin-bottom:8px}.mail-item.unread{border-color:#4b9867;background:#0d2115}.mail-item h4{margin:0 0 5px}.mail-item p{margin:5px 0;color:#a8beaf;line-height:1.45}.mail-item small{color:#718b7a}.social-search{display:flex;gap:8px;margin:12px 0}.social-search input{flex:1;background:#07110c;color:#fff;border:1px solid #31523f;border-radius:9px;padding:11px}.request-pill{padding:5px 8px;border-radius:99px;background:#173a25;color:#8ff0ae;font-size:9px;font-weight:900}
+@media(max-width:850px){.social-layout{grid-template-columns:1fr}}
+
+/* ===== V9: MULTIPLAYER PVP REAL ===== */
+.pvp-panel{border:1px solid #28533a;background:linear-gradient(145deg,#09170f,#07110b);border-radius:15px;padding:15px;margin-top:12px}
+.pvp-status{display:flex;align-items:center;gap:8px;font-weight:900}.pvp-dot{width:9px;height:9px;border-radius:50%;background:#55e68d;box-shadow:0 0 12px #55e68d}
+.pvp-match{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;text-align:center;margin:14px 0}.pvp-team b{display:block;font-size:17px}.pvp-team small{color:var(--muted)}.pvp-score{font-size:34px;font-weight:1000;white-space:nowrap}
+.pvp-invite{border:1px solid #3f7653;background:#0c2114;border-radius:12px;padding:12px;margin:8px 0}.pvp-log{height:190px;overflow:auto;background:#050b07;border:1px solid #193021;border-radius:10px;padding:10px;font-size:11px;line-height:1.6}.pvp-log div{border-bottom:1px solid #102218;padding:4px 0}.pvp-ready{color:#6ff19d;font-weight:900}.pvp-wait{color:#e6c86e;font-weight:900}
+
+/* ===== V10 • CENTRAL DE COMPETIÇÕES ===== */
+.comp-v10-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.comp-v10-tabs button{border:1px solid var(--line);background:#09150f;color:var(--muted);padding:8px 11px;border-radius:9px;cursor:pointer;font-weight:850}.comp-v10-tabs button.active{border-color:var(--green);color:#fff;background:#143322}.comp-v10-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.comp-v10-card{background:#09150f;border:1px solid var(--line);border-radius:13px;padding:14px}.comp-v10-card h3{margin:0 0 5px}.comp-v10-meta{font-size:11px;color:var(--muted);line-height:1.55}.prize-v10{margin-top:10px;padding:9px;border-radius:9px;background:#29220d;border:1px solid #6b5820;color:#ffe08a;font-weight:850}.format-v10{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}.format-v10 span{font-size:9px;padding:4px 6px;border-radius:6px;background:#14291e;color:#9debb8}.world-table-v10{width:100%;border-collapse:collapse;margin-top:10px}.world-table-v10 td,.world-table-v10 th{padding:8px 6px;border-bottom:1px solid var(--line);font-size:11px}.world-table-v10 tr.me{background:#153522}.comp-v10-hero{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}.comp-v10-money{font-size:22px;font-weight:950;color:#ffd166}.award-v10{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.award-v10>div{background:#09150f;border:1px solid var(--line);border-radius:10px;padding:10px}.award-v10 small{display:block;color:var(--muted);font-size:9px}.award-v10 b{display:block;margin-top:4px}@media(max-width:800px){.comp-v10-grid,.award-v10{grid-template-columns:1fr}}
+
+
+/* ===== V10.2 • MENU HAMBÚRGUER ===== */
+.app{display:block}.sidebar{position:fixed;left:0;top:0;width:270px;height:100vh;z-index:80;transform:translateX(-105%);transition:transform .28s cubic-bezier(.2,.8,.2,1);box-shadow:18px 0 60px #000b}.sidebar.menu-open{transform:translateX(0)}.main{max-width:1500px;margin:auto;padding:76px 25px 25px}.menu-toggle{position:fixed;left:18px;top:16px;z-index:95;width:48px;height:44px;border:1px solid var(--line);border-radius:13px;background:#0b1b13eF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;box-shadow:0 10px 30px #0008}.menu-toggle i{display:block;width:22px;height:2px;background:#fff;border-radius:4px;transition:.25s}.menu-toggle.open i:nth-child(1){transform:translateY(7px) rotate(45deg)}.menu-toggle.open i:nth-child(2){opacity:0;transform:scaleX(.2)}.menu-toggle.open i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}.menu-backdrop{position:fixed;inset:0;background:#0008;z-index:70;opacity:0;pointer-events:none;transition:.25s}.menu-backdrop.show{opacity:1;pointer-events:auto}.sidebar .nav button{transition:transform .16s,background .16s,color .16s}.sidebar .nav button:hover{transform:translateX(5px)}.quick-sim-v102{background:linear-gradient(135deg,#ffd166,#f3a712);color:#261800}.league-zone{font-size:9px;font-weight:900;padding:3px 6px;border-radius:6px;margin-left:5px}.league-zone.up{background:#153e26;color:#8ef0ad}.league-zone.down{background:#421d22;color:#ff9da6}.season-movement{margin-top:10px;padding:10px;border-radius:10px;background:#0b1a12;border:1px solid var(--line)}
+@media(max-width:800px){.sidebar{height:100vh;padding:18px 12px}.sidebar .brand,.sidebar .club-mini,.sidebar .online-pill{display:block}.sidebar .nav{display:grid;overflow:visible}.sidebar .nav button{white-space:normal}.main{padding:72px 13px 13px}}
+
+
+/* ===== V10.4 • MERCADO / PVP / RANKING ===== */
+.pvp-manager-v104{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;margin:12px 0}.pvp-manager-v104 .box{background:#09150f;border:1px solid var(--line);border-radius:12px;padding:12px}.pvp-xi-v104{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;max-height:270px;overflow:auto}.pvp-player-v104{display:flex;justify-content:space-between;gap:8px;padding:7px;border-radius:8px;background:#10251a;border:1px solid #1f4730;font-size:10px;cursor:pointer}.pvp-player-v104:hover{transform:translateY(-1px)}.pvp-player-v104.starter{border-color:#53d887}.pvp-player-v104.bench{opacity:.8}.pvp-tactics-v104{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pvp-tactics-v104 select{width:100%;padding:9px;border-radius:8px;background:#07110c;color:#fff;border:1px solid var(--line)}.ranking-v104{width:100%;border-collapse:collapse}.ranking-v104 th,.ranking-v104 td{padding:10px 8px;border-bottom:1px solid var(--line);font-size:11px;text-align:left}.ranking-v104 tr.me{background:#153522}.rank-medal-v104{font-size:18px}.rank-refresh-v104{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.market-replacement-v104{font-size:9px;color:#83e7a6;margin-top:4px}@media(max-width:800px){.pvp-manager-v104{grid-template-columns:1fr}.pvp-xi-v104{grid-template-columns:1fr}}
+
+
+/* ===== V11 • CLUBES REAIS / CONTINENTAIS ===== */
+.competition-v11{padding:13px;margin:10px 0;border:1px solid var(--line);border-radius:12px;background:#09170f}.clubchips-v11{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}.clubchips-v11 span{padding:5px 7px;border-radius:7px;background:#10271a;border:1px solid #24583a;font-size:9px}
+
+
+.official-groups-v112{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin-top:12px}
+.official-group-v112{border:1px solid var(--line);border-radius:10px;padding:10px;background:#08150e;display:flex;flex-direction:column;gap:4px}
+.official-group-v112 b{color:#52e98b;margin-bottom:4px}.official-group-v112 span{font-size:10px}
+
+.stand-wrap-v12{overflow:auto;max-height:620px;border:1px solid var(--line);border-radius:12px}
+.stand-v12{width:100%;border-collapse:collapse;min-width:700px;font-size:11px}.stand-v12 th{position:sticky;top:0;background:#102017;z-index:2}
+.stand-v12 th,.stand-v12 td{padding:8px;border-bottom:1px solid #183523;text-align:center}.stand-v12 .club-v12{text-align:left;font-weight:700}
+.zone-cont-v12 td:first-child{border-left:4px solid #55aaff}.zone-up-v12 td:first-child{border-left:4px solid #52e98b}.zone-down-v12 td:first-child{border-left:4px solid #ff6464}
+.stand-legend-v12{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:10px}.stand-legend-v12 span:nth-child(1)::before{content:"■ ";color:#55aaff}.stand-legend-v12 span:nth-child(2)::before{content:"■ ";color:#52e98b}.stand-legend-v12 span:nth-child(3)::before{content:"■ ";color:#ff6464}
+
+</style>
+<style>
+.squad-layout,.tactic-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:14px}.table-wrap{overflow:auto}.squad-table{width:100%;border-collapse:collapse;min-width:760px}.squad-table th{font-size:10px;color:var(--muted);text-align:left;padding:9px;border-bottom:1px solid var(--line)}.squad-table td{padding:10px 9px;border-bottom:1px solid #183025}.pos{display:inline-grid;place-items:center;min-width:38px;padding:5px;border-radius:7px;background:#173524;color:#9df0b6;font-size:10px;font-weight:950}.ovr{font-size:17px;font-weight:1000}.meter{height:6px;background:#17281f;border-radius:9px;overflow:hidden;min-width:70px}.meter i{display:block;height:100%;background:var(--green)}.player-row{cursor:pointer}.player-row:hover{background:#10231a}.status-tag{font-size:10px;padding:4px 7px;border-radius:999px;background:#17281f}.tactic-pitch{position:relative;aspect-ratio:68/92;background:repeating-linear-gradient(0deg,#157943 0 10%,#19894c 10% 20%);border:2px solid #dfffea;border-radius:15px;overflow:hidden;max-width:570px;margin:auto}.tactic-pitch:before{content:'';position:absolute;left:0;right:0;top:50%;border-top:2px solid #ffffff99}.tactic-pitch:after{content:'';position:absolute;left:50%;top:50%;width:22%;aspect-ratio:1;border:2px solid #ffffff99;border-radius:50%;transform:translate(-50%,-50%)}.slot{position:absolute;transform:translate(-50%,-50%);width:72px;text-align:center;z-index:2}.slot-dot{width:38px;height:38px;margin:auto;border-radius:50%;display:grid;place-items:center;background:var(--kit);border:2px solid white;font-size:10px;font-weight:1000;box-shadow:0 5px 12px #0007}.slot-name{font-size:9px;font-weight:900;background:#06120dcc;border-radius:6px;padding:3px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tactic-controls{display:grid;gap:11px}.control-box{background:#09150f;border:1px solid var(--line);padding:12px;border-radius:12px}.control-box label{display:block;color:var(--muted);font-size:10px;font-weight:900;margin-bottom:6px}.control-box select{width:100%;background:#0d1d15;color:white;border:1px solid #31523f;border-radius:8px;padding:9px}.mini-player{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px;border-bottom:1px solid #1a3327}.rating-badge{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#163a26;font-weight:1000}.role-title{font-size:11px;color:var(--gold);font-weight:900}.squad-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}.squad-summary div{padding:10px;background:#09150f;border:1px solid var(--line);border-radius:10px;text-align:center}.squad-summary b{display:block;font-size:19px}@media(max-width:900px){.squad-layout,.tactic-layout{grid-template-columns:1fr}}
+
+.player-row.selectable{cursor:pointer}.player-row.selectable:hover{background:rgba(59,130,246,.08)}.player-row.selected{outline:2px solid #38bdf8;outline-offset:-2px;background:rgba(56,189,248,.12)}.swap-help{padding:12px 14px;margin-bottom:12px;border:1px solid rgba(56,189,248,.3);border-radius:12px;background:rgba(56,189,248,.08);font-size:13px}.swap-btn{border:0;border-radius:8px;padding:7px 10px;font-weight:800;cursor:pointer;background:#2563eb;color:white}.swap-btn:disabled{opacity:.35;cursor:not-allowed}.mini-player.swap-card{cursor:pointer;border:1px solid transparent}.mini-player.swap-card:hover{border-color:#38bdf8}.mini-player.swap-card.selected{border-color:#38bdf8;background:rgba(56,189,248,.12)}
+
+/* V3 MATCH ENGINE */
+.match2d-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px}.match2d-score{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;text-align:center;margin-bottom:12px}.score-team{font-size:16px;font-weight:950}.score-num{font-size:34px;font-weight:1000}.match-clock{font-size:13px;color:var(--gold);font-weight:900}.match2d-pitch{position:relative;aspect-ratio:105/68;background:repeating-linear-gradient(90deg,#157943 0 10%,#19894c 10% 20%);border:3px solid #dfffea;border-radius:15px;overflow:hidden;box-shadow:inset 0 0 55px #00170aaa}.match2d-pitch:before{content:"";position:absolute;left:50%;top:0;height:100%;border-left:2px solid #ffffffaa}.match2d-pitch:after{content:"";position:absolute;left:50%;top:50%;width:18%;aspect-ratio:1;border:2px solid #ffffffaa;border-radius:50%;transform:translate(-50%,-50%)}.field-box{position:absolute;top:25%;width:16%;height:50%;border:2px solid #ffffffaa}.field-box.left{left:-2px}.field-box.right{right:-2px}.sim-player{position:absolute;width:26px;height:26px;border-radius:50%;transform:translate(-50%,-50%);display:grid;place-items:center;border:2px solid #fff;font-size:8px;font-weight:1000;box-shadow:0 3px 8px #0009;transition:left .32s linear,top .32s linear;z-index:3}.sim-player.home-side{background:var(--kit)}.sim-player.away-side{background:#2b64ad}.sim-player .pname{position:absolute;top:27px;left:50%;transform:translateX(-50%);font-size:8px;background:#06100bd9;padding:2px 4px;border-radius:4px;white-space:nowrap;color:#fff}.sim-ball{position:absolute;width:11px;height:11px;border-radius:50%;background:#fff;border:1px solid #222;transform:translate(-50%,-50%);z-index:5;box-shadow:0 2px 5px #000;transition:left .22s linear,top .22s linear}.match-feed{height:320px;overflow:auto;display:flex;flex-direction:column;gap:7px}.match-event{padding:8px 9px;border-radius:8px;background:#09150f;border:1px solid #1c3427;font-size:12px}.match-event.goal{border-color:#ffd166;color:#ffe6a3}.match-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.possession{display:flex;height:9px;border-radius:20px;overflow:hidden;background:#193025;margin:8px 0}.possession i{display:block;background:var(--kit);height:100%}.match-state{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.match-state div{background:#09150f;border:1px solid var(--line);border-radius:9px;padding:8px;text-align:center}.match-state b{display:block;font-size:16px}@media(max-width:950px){.match2d-layout{grid-template-columns:1fr}.match-feed{height:220px}}
+</style>
+
+
+
+
+<style>
+/* ===== UFM V12.5 • INTERFACE DE PARTIDA ===== */
+#match .match2d-layout{grid-template-columns:minmax(0,1fr) 360px;align-items:start}
+#match .card{background:linear-gradient(145deg,#0c1b13,#07110c);border-color:#285039}
+.match-context-v125{display:grid;grid-template-columns:1.2fr repeat(3,minmax(110px,.55fr));gap:8px;margin-bottom:12px}
+.match-context-v125>div{background:#07130d;border:1px solid #234a33;border-radius:11px;padding:10px 12px}
+.match-context-v125 small{display:block;color:var(--muted);font-size:9px;font-weight:900;letter-spacing:.5px;margin-bottom:4px}
+.match-context-v125 b{font-size:13px}
+#match .match2d-score{padding:18px 14px;background:radial-gradient(circle at 50% 0,#183e29,#07130d 70%);border:1px solid #234a33;border-radius:15px}
+#match .score-num{font-size:40px;letter-spacing:-1px}
+#match .match-actions{position:sticky;top:76px;z-index:4;background:#09170f;padding:10px;border:1px solid #244a33;border-radius:13px;margin-top:12px}
+#match .match-actions .btn{min-height:45px}
+#quickSimBtnV102{background:linear-gradient(135deg,#ffd166,#f2a900)!important;color:#281900!important}
+.match-ready-v125{margin:12px 0;padding:11px 13px;border-radius:11px;border:1px solid #2a6242;background:#0d2618;color:#a7efbd;font-size:11px}
+.match-ready-v125.warn{border-color:#745f24;background:#2a230d;color:#ffe08a}
+#matchFeed{background:#050c08;border:1px solid #1f402c;border-radius:12px;padding:9px}
+#match .match-manager{background:#08150e;border:1px solid #1f402c;border-radius:13px;padding:14px;margin-top:14px}
+@media(max-width:900px){.match-context-v125{grid-template-columns:1fr 1fr}#match .match2d-layout{grid-template-columns:1fr}#match .match-actions{position:static}}
+</style>
+
+
+<style>
+/* ===== V12.7 • CALENDÁRIO MULTICOMPETIÇÕES ===== */
+.calendar-filter-v127{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 14px}
+.calendar-filter-v127 button{border:1px solid #28503a;background:#0a1a11;color:#cfe9d7;border-radius:999px;padding:7px 11px;font-size:10px;font-weight:900;cursor:pointer}
+.calendar-filter-v127 button.active{background:#52e98b;color:#041109;border-color:#52e98b}
+.calendar-list-v127{display:grid;gap:8px}
+.calendar-game-v127{display:grid;grid-template-columns:100px 145px 1fr auto;gap:10px;align-items:center;background:#07130d;border:1px solid #1e422d;border-radius:12px;padding:10px 12px}
+.calendar-game-v127 .date{font-weight:900}.calendar-game-v127 .comp{font-size:9px;color:#91b89d;font-weight:900;text-transform:uppercase}.calendar-game-v127 .clubs{font-weight:800}.calendar-game-v127 .status{font-size:10px;font-weight:900}
+.calendar-game-v127 .played{color:#82e8a5}.calendar-game-v127 .next{color:#ffd166}
+@media(max-width:720px){.calendar-game-v127{grid-template-columns:75px 1fr}.calendar-game-v127 .clubs{grid-column:1/-1}}
+</style>
+
+
+<meta name="theme-color" content="#07130d">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="UFM">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/ufm-icon.svg" type="image/svg+xml">
+
+</head><body>
+<div id="ufmLanding">
+ <header class="site-nav">
+  <div class="site-brand">⚽ UFM <span>ONLINE</span></div>
+  <div class="site-actions">
+   <button class="site-btn" onclick="openSiteAuth('login')">ENTRAR</button>
+   <button class="site-btn primary" onclick="openSiteAuth('register')">JOGAR AGORA</button>
+  </div>
+ </header>
+ <main class="site-hero">
+  <section>
+   <span class="site-kicker">ULTIMATE FOOTBALL MANAGER</span>
+   <h1>CRIE SEU CLUBE.<br><span>CONSTRUA SUA HISTÓRIA.</span></h1>
+   <p class="site-lead">Monte seu elenco, defina sua tática, negocie jogadores, desenvolva a estrutura do clube e dispute temporadas no seu próprio universo de futebol.</p>
+   <div class="site-cta">
+    <button class="site-btn primary" onclick="openSiteAuth('register')">⚽ CRIAR MEU CLUBE</button>
+    <button class="site-btn" onclick="openSiteAuth('login')">JÁ TENHO CONTA</button>
+   </div>
+   <div class="site-note">Jogue pelo navegador • Conta individual • Progresso salvo online</div>
+  </section>
+  <aside class="site-card">
+   <div class="site-score"><small>EXPERIÊNCIA DE MANAGER</small><strong>UFM ONLINE</strong><small>Você toma as decisões. O futebol responde.</small></div>
+   <div class="site-feed">
+    <div>📋 Monte o XI titular e ajuste a formação.</div>
+    <div>💰 Compre, venda e administre as finanças.</div>
+    <div>🏟️ Evolua estádio, academia e estrutura.</div>
+    <div>🔎 Encontre talentos com sua rede de olheiros.</div>
+   </div>
+  </aside>
+ </main>
+ <section class="site-features">
+  <h2>SEU CLUBE. SUAS DECISÕES.</h2>
+  <div class="site-grid">
+   <article class="site-feature"><b>⚽ Gestão completa</b><p>Elenco, escalação, atributos, substituições e diferentes abordagens táticas.</p></article>
+   <article class="site-feature"><b>🏆 Temporadas</b><p>Dispute partidas, acompanhe a tabela e tente levar seu clube ao título.</p></article>
+   <article class="site-feature"><b>👤 Carreira individual</b><p>Cada conta possui seu próprio clube, elenco, dinheiro, estrutura e progresso.</p></article>
+   <article class="site-feature"><b>📈 Desenvolvimento</b><p>Treine jogadores, trabalhe o potencial dos jovens e fortaleça seu plantel.</p></article>
+   <article class="site-feature"><b>🏟️ Construa o clube</b><p>Invista no estádio, centro de treinamento, academia, departamento médico e comissão.</p></article>
+   <article class="site-feature"><b>🌐 UFM Online</b><p>A base online está preparada para contas individuais e evolução do multiplayer.</p></article>
+  </div>
+ </section>
+ <footer class="site-footer"><span>Ultimate Football Manager • UFM Online</span><span>Jogo independente para navegador</span></footer>
+</div>
+
+<div id="authGate" class="auth-gate">
+ <div class="auth-panel">
+  <button class="site-btn" style="padding:7px 10px;margin-bottom:12px" onclick="returnToSite()">← VOLTAR</button><h1>⚽ UFM Online</h1><p class="muted">Sua conta, seu clube, seu elenco e sua carreira.</p>
+  <div id="firebaseConfigNotice" class="config-box">Conectando ao Firebase…</div>
+  <div class="auth-tabs"><button class="btn" onclick="showAuthMode('login')">ENTRAR</button><button class="btn alt" onclick="showAuthMode('register')">CRIAR CONTA</button></div>
+  <input id="authName" placeholder="Nome do treinador" style="display:none">
+  <input id="authEmail" type="email" placeholder="E-mail">
+  <input id="authPassword" type="password" minlength="6" placeholder="Senha (mínimo 6 caracteres)">
+  <button id="authSubmit" class="btn" style="width:100%;margin-top:8px" onclick="submitAuth()">ENTRAR</button>
+  <div id="authError" class="auth-error"></div>
+ </div>
+</div>
+
+<section id="landing" class="landing hidden" style="display:none!important"><div class="hero"><div class="hero-card hero-copy"><div class="brand">ULTIMATE <span>FOOTBALL</span> MANAGER</div><h1>SEU CLUBE.<br>SEU MUNDO.</h1><p class="muted">Construa um clube, desenvolva jogadores e prepare-se para enfrentar técnicos reais em um mundo de futebol conectado.</p><div class="features"><span class="chip">⚽ SIMULAÇÃO DE PARTIDAS</span><span class="chip">🌎 CARREIRA</span><span class="chip">⚔️ PvP ONLINE</span><span class="chip">🏆 COMPETIÇÕES</span></div><button class="btn" onclick="startCareer()">CRIAR NOVA CARREIRA</button> <button class="btn alt" onclick="continueCareer()">CONTINUAR</button></div><div class="hero-card hero-side"><div class="pitch"><i class="dot home" style="left:22%;top:50%"></i><i class="dot home" style="left:36%;top:28%"></i><i class="dot home" style="left:39%;top:70%"></i><i class="dot home" style="left:48%;top:45%"></i><i class="dot away" style="left:78%;top:50%"></i><i class="dot away" style="left:63%;top:30%"></i><i class="dot away" style="left:62%;top:69%"></i><i class="dot away" style="left:54%;top:57%"></i><i class="dot ball" style="left:51%;top:49%"></i></div><p class="muted" style="text-align:center">Partidas • decisões táticas em tempo real</p></div></div></section>
+<section id="wizard" class="wizard hidden"><div class="wizard-shell"><div class="steps"><i class="step on"></i><i class="step"></i><i class="step"></i><i class="step"></i></div><div class="hero-card wizard-card"><div id="wizardContent"></div><div class="wizard-actions"><button id="backBtn" class="btn alt" onclick="prevStep()">Voltar</button><button class="btn" onclick="nextStep()">Continuar</button></div></div></div></section>
+<section id="game" class="app hidden"><button id="menuToggleV102" class="menu-toggle" onclick="toggleMenuV102()" aria-label="Abrir menu"><i></i><i></i><i></i></button><div id="menuBackdropV102" class="menu-backdrop" onclick="closeMenuV102()"></div><aside id="sidebarV102" class="sidebar"><div class="brand">UFM <span>ONLINE</span></div><div class="club-mini"><div class="crest" id="sideCrest">FC</div><b id="sideClub">Meu Clube</b><small class="muted" id="sideLeague">Liga</small></div><nav class="nav"><button class="active" onclick="goPage('hub',this)">⌂ Central</button><button onclick="goPage('tactics',this)">▦ Táticas</button><button onclick="goPage('match',this)">⚽ Partida</button><button onclick="goPage('calendar',this)">▣ Temporada</button><button onclick="goPage('competitions',this)">🏆 Competições</button><button onclick="goPage('market',this)">⇄ Mercado</button><button onclick="goPage('inbox',this)">✉ Caixa de Entrada <span id="inboxBadge" class="inbox-badge hidden">0</span></button><button onclick="goPage('friends',this)">👥 Amigos</button><button onclick="goPage('online',this)">⚔ Online</button><button onclick="goPage('ranking',this)">🏅 Ranking Online</button><button onclick="goPage('club',this)">⬡ Clube</button><div id="accountBox" class="account-chip" style="margin:10px"><b id="accountTrainer">Offline</b><br><span id="accountUid" class="muted">Sem conta</span><br><button class="btn alt" style="margin-top:6px;width:100%" onclick="logoutUfm()">SAIR</button></div></nav><div class="online-pill"><span id="backendSidebarDot">●</span> <span id="backendSidebarTitle">CONECTANDO</span><br><span class="muted" id="backendSidebarText">Firebase / Firestore</span></div></aside><main class="main"><div class="topbar"><div><small class="muted">TEMPORADA 2026/27</small><h2 id="pageTitle">Central do Clube</h2></div><div style="display:flex;gap:8px;align-items:center"><span id="autosaveV14" class="chip">☁ AUTO SAVE</span><button class="btn alt" onclick="resetCareer()">Nova carreira</button></div></div><section id="hub" class="page active"><div class="grid"><div class="card stat"><span>CAIXA</span><b id="hubCashV10">—</b></div><div class="card stat"><span>REPUTAÇÃO</span><b>★ 1,5</b></div><div class="card stat"><span>TORCIDA</span><b>12.480</b></div><div class="card stat"><span>POSIÇÃO</span><b>—</b></div><div class="card full"><small class="live">PRÓXIMA PARTIDA</small><div class="match-card"><div><div class="crest" id="homeCrest" style="margin:0 auto 8px">FC</div><div class="club-big" id="homeClub">Meu Clube</div></div><div><div class="vs">VS</div><small class="muted">Liga • Rodada 1</small><br><button class="btn" style="margin-top:12px" onclick="openMatchPage()">JOGAR PARTIDA</button></div><div><div class="crest" style="margin:0 auto 8px;background:#2b64ad">RIV</div><div class="club-big">Rival FC</div></div></div></div><div class="card wide"><h3>🌎 Mundo do Futebol</h3><div class="activity"><div class="activity-item"><b>Mercado aberto para a nova temporada</b><small>Clubes começam a reforçar seus elencos.</small></div><div class="activity-item"><b>Primeira rodada se aproxima</b><small>Prepare sua escalação e identidade tática.</small></div><div class="activity-item"><b>Modo Online</b><small>Desafios entre clubes serão integrados à carreira.</small></div></div></div><div class="card side"><h3>Amigos</h3><div id="hubFriendsV14"><p class="muted">Carregando suas amizades…</p></div></div></div></section><section id="squad" class="page"><div class="squad-layout"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><h2 style="margin:0">♟ Elenco profissional</h2><p class="muted">Seu plantel para a temporada.</p></div><span class="chip" id="squadCount">23 JOGADORES</span></div><div class="swap-help" id="swapHelp"><b>🔄 Substituições:</b> clique em um jogador e depois em outro para trocar Titular ↔ Banco/Elenco. A escalação é salva automaticamente.</div><div class="table-wrap"><table class="squad-table"><thead><tr><th>JOGADOR</th><th>POS</th><th>IDADE</th><th>OVR</th><th>POT</th><th>CONDIÇÃO</th><th>MORAL</th><th>STATUS</th></tr></thead><tbody id="squadBody"></tbody></table></div></div><div class="card"><h3>Resumo do elenco</h3><div class="squad-summary"><div><span class="muted">OVR</span><b id="teamOvr">—</b></div><div><span class="muted">MÉDIA</span><b id="avgAge">—</b></div><div><span class="muted">VALOR</span><b id="teamValue">—</b></div></div><h3>⭐ Destaques</h3><div id="starPlayers"></div><h3>📋 Situação</h3><p class="muted" id="squadInfo"></p></div></div></section><section id="tactics" class="page"><div class="tactic-layout"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><h2 style="margin:0">▦ Campo Tático</h2><p class="muted">Os titulares mudam conforme a formação.</p></div><span class="chip" id="formationLabel">4-3-3</span></div><div id="tacticPitch" class="tactic-pitch"></div></div><div class="card"><h3>Plano de jogo</h3><div class="tactic-controls"><div class="control-box"><label>FORMAÇÃO</label><select id="formationSelect" onchange="changeTactic()"><option>4-3-3</option><option>4-4-2</option><option>4-2-3-1</option><option>3-5-2</option></select></div><div class="control-box"><label>ESTILO</label><select id="gameStyle" onchange="changeTactic()"><option>Equilibrado</option><option>Posse de bola</option><option>Contra-ataque</option><option>Pressão alta</option></select></div><div class="control-box"><label>MENTALIDADE</label><select id="mentality" onchange="changeTactic()"><option>Equilibrada</option><option>Defensiva</option><option>Ofensiva</option></select></div><div class="control-box"><label>PRESSÃO</label><select id="pressing" onchange="changeTactic()"><option>Média</option><option>Baixa</option><option>Alta</option></select></div></div><div class="tactic-tip"><b>🔄 Escalação:</b> clique em um titular no campo e depois em qualquer jogador abaixo para trocar. Você também pode trocar banco ↔ reserva.</div><h3 style="margin-top:18px">Banco</h3><div id="benchList"></div><div class="tactics-roster"><div class="roster-head"><h3 style="margin:0">Todos os jogadores</h3><span class="chip" id="tacticSquadCount">23 JOGADORES</span></div><div id="tacticRoster"></div></div></div></div></section><section id="match" class="page"><div id="matchReadyV125" class="match-ready-v125">Preparando a próxima partida…</div><div class="match-context-v125"><div><small>COMPETIÇÃO</small><b id="matchCompetitionV125">Liga Nacional</b></div><div><small>RODADA</small><b id="matchRoundV125">—</b></div><div><small>MANDO</small><b id="matchVenueV125">—</b></div><div><small>ADVERSÁRIO</small><b id="matchOpponentV125">—</b></div></div><div class="match2d-layout"><div class="card"><div class="match2d-score"><div><div class="score-team" id="mHomeName">Meu Clube</div><small class="muted">CASA</small></div><div><div class="score-num"><span id="mHomeScore">0</span> × <span id="mAwayScore">0</span></div><div class="match-clock" id="mClock">00:00</div></div><div><div class="score-team">Rival FC</div><small class="muted">VISITANTE</small></div></div><div class="match-state"><div><small class="muted">POSSE</small><b id="mPoss">50% - 50%</b></div><div><small class="muted">FINALIZAÇÕES</small><b id="mShots">0 - 0</b></div><div><small class="muted">ESTADO</small><b id="mStatus">Pronto</b></div></div><div class="possession"><i id="mPossBar" style="width:50%"></i></div><div class="match-actions"><button class="btn" id="startMatchBtn" onclick="startMatch()">INICIAR PARTIDA</button><button class="btn quick-sim-v102" id="quickSimBtnV102" onclick="simulateOfflineInstantV102()">⚡ SIMULAR SEM ASSISTIR</button></div><div class="match-manager"><h3>🧠 Área técnica</h3><div class="match-manager-grid"><div class="match-control"><label>FORMAÇÃO</label><select id="liveFormation" onchange="applyLiveTactics()"><option>4-3-3</option><option>4-4-2</option><option>4-2-3-1</option><option>3-5-2</option></select></div><div class="match-control"><label>MENTALIDADE</label><select id="liveMentality" onchange="applyLiveTactics()"><option>Defensiva</option><option>Equilibrada</option><option>Ofensiva</option></select></div><div class="match-control"><label>ESTILO</label><select id="liveStyle" onchange="applyLiveTactics()"><option>Equilibrado</option><option>Posse</option><option>Contra-ataque</option><option>Pressão alta</option></select></div><div class="match-control"><label>PRESSÃO</label><select id="livePressing" onchange="applyLiveTactics()"><option>Baixa</option><option>Média</option><option>Alta</option></select></div></div><div class="match-subs"><div class="match-control"><label>SAI</label><select id="subOut"></select></div><button class="btn alt" onclick="makeLiveSub()">⇄ SUBSTITUIR</button><div class="match-control"><label>ENTRA</label><select id="subIn"></select></div></div><div class="match-sub-count" id="subCount">Substituições: 0/5</div><div class="match-strength"><div><small>FORÇA XI</small><b id="mXIQuality">--</b></div><div><small>RIVAL</small><b id="mRivalQuality">--</b></div><div><small>ENERGIA</small><b id="mEnergy">100%</b></div></div></div><div style="margin-top:18px"><h3>📻 Narração da partida</h3><p class="muted">O motor considera força do XI, posições, condição física, cansaço e plano tático. Não há resultado pré-definido.</p><div id="matchFeed" class="match-feed" style="max-height:430px;overflow:auto"><div class="match-event">As equipes aguardam o início da partida.</div></div></div></div><div class="card"><h3 style="margin-top:0">📋 Seu plano</h3><div id="matchPlan" class="activity"></div><h3>Critérios da simulação</h3><div class="activity"><div class="activity-item"><b>Qualidade real do XI</b><small>OVR dos jogadores escalados e adequação básica às posições.</small></div><div class="activity-item"><b>Condição e cansaço</b><small>A equipe perde rendimento ao longo da partida; substituições recuperam qualidade em campo.</small></div><div class="activity-item"><b>Tática sem bônus artificial</b><small>Mudar para ofensiva cria mais volume, mas também expõe a defesa. Pressão alta cobra mais energia.</small></div><div class="activity-item"><b>Futebol continua imprevisível</b><small>O time mais forte é favorito, não vencedor automático.</small></div></div></div></div><div class="card" style="margin-top:14px"><h2 style="margin-top:0">👥 Elenco do adversário</h2><div id="opponentRoster" style="max-height:360px;overflow:auto"></div></div></section><section id="calendar" class="page"><div class="season-grid"><div class="card"><div class="season-head"><div><h2 style="margin:0">🏆 Liga Nacional</h2><p class="muted">Temporada 2026/27</p></div><span class="chip" id="seasonRoundChip">RODADA 1</span></div><div class="season-kpis"><div><small>POSIÇÃO</small><b id="seasonPos">—</b></div><div><small>PONTOS</small><b id="seasonPts">0</b></div><div><small>JOGOS</small><b id="seasonPlayed">0</b></div><div><small>SALDO</small><b id="seasonGD">0</b></div></div><div class="table-wrap"><table class="standings"><thead><tr><th>#</th><th>CLUBE</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th><th>PTS</th></tr></thead><tbody id="standingsBody"></tbody></table></div></div><div class="card"><h3 style="margin-top:0">📅 Seus jogos</h3><div id="fixtureList" class="round-list"></div><div id="seasonFinalBox"></div><div id="leagueMovementV102"></div><h3>📚 Histórico das rodadas</h3><div id="roundHistory"></div></div>
+<div class="card" style="margin-top:14px"><div class="season-head"><div><h2 style="margin:0">👔 Gestão da Carreira</h2><p class="muted">Contratos, diretoria e evolução da temporada.</p></div><span class="season-badge" id="careerDate">AGOSTO 2026</span></div><div class="career-grid"><div class="career-kpi"><small>CONFIANÇA DA DIRETORIA</small><b id="boardTrust">70%</b></div><div class="career-kpi"><small>FOLHA MENSAL</small><b id="careerWages">—</b></div><div class="career-kpi"><small>JOGADORES LESIONADOS</small><b id="injuryCount">0</b></div><div class="career-kpi"><small>CONTRATOS A VENCER</small><b id="contractCount">0</b></div></div><h3>🎯 Objetivos da diretoria</h3><div id="boardObjectives"></div><h3>📄 Situação do elenco</h3><div id="careerSquadStatus"></div><div id="seasonAwards"></div></div>
+</div></section>
+<section id="competitions" class="page">
+ <div class="grid">
+  <div class="card full">
+   <div class="comp-v10-hero"><div><h2 style="margin:0">🏆 Central de Ligas & Copas</h2><p class="muted">Competições da carreira, formatos, classificações e premiações.</p></div><div><small class="muted">CAIXA ATUAL</small><div class="comp-v10-money" id="compCashV10">—</div></div></div>
+   <div class="comp-v10-tabs" id="compCountryTabsV10"></div>
+   <div id="compCountryV10"></div>
+  </div>
+  <div class="card full"><h2>🌎 Copas internacionais</h2><div class="comp-v10-grid" id="internationalCupsV10"></div></div>
+  <div class="card full"><h2>💰 Premiações</h2><p class="muted">Os prêmios entram no caixa do clube e ficam registrados nas finanças.</p><div class="award-v10" id="prizeBoardV10"></div></div>
+  <div class="card full"><h2>📊 Tabelas de Classificação</h2><p class="muted">Selecione país e divisão para ver a classificação.</p><div class="form-grid" style="margin:10px 0"><div class="field"><label>PAÍS</label><select id="standCountryV12" onchange="fillStandDivisionsV12()"></select></div><div class="field"><label>DIVISÃO</label><select id="standDivisionV12" onchange="renderStandingsV12()"></select></div></div><div id="standSourceV12" class="muted" style="font-size:10px;margin:8px 0"></div><div id="standTableV12" class="stand-wrap-v12"></div><div id="standLegendV12" class="stand-legend-v12"></div></div>
+ </div>
+</section>
+
+<section id="ranking" class="page">
+ <div class="grid">
+  <div class="card full">
+   <div class="rank-refresh-v104"><div><h2 style="margin:0">🏅 Ranking Mundial UFM</h2><p class="muted">Ranking dos jogadores cadastrados. A pontuação é publicada pela carreira e a tabela diária usa o snapshot do dia.</p></div><button class="btn" onclick="loadRankingV104(true)">ATUALIZAR</button></div>
+   <div id="rankingStatusV104" class="muted" style="margin:10px 0">Carregando...</div>
+   <div style="overflow:auto"><table class="ranking-v104"><thead><tr><th>#</th><th>Treinador</th><th>Clube</th><th>Divisão</th><th>Temporada</th><th>Pontos</th></tr></thead><tbody id="rankingBodyV104"></tbody></table></div>
+  </div>
+ </div>
+</section>
+<section id="market" class="page"><div class="market-layout"><div class="card"><div class="season-head"><div><h2 style="margin:0">⇄ Mercado de Transferências</h2><p class="muted">Contrate jogadores dentro do orçamento do clube.</p></div><button class="btn alt" onclick="refreshMarket(true)">ATUALIZAR MERCADO</button></div><div class="market-toolbar"><input id="marketSearch" placeholder="Buscar jogador..." oninput="renderMarket()"><select id="marketPos" onchange="renderMarket()"><option value="">Todas posições</option><option>GOL</option><option>LD</option><option>ZAG</option><option>LE</option><option>VOL</option><option>MC</option><option>MEI</option><option>PD</option><option>PE</option><option>ATA</option></select><select id="marketSort" onchange="renderMarket()"><option value="ovr">Maior OVR</option><option value="price">Menor preço</option><option value="age">Mais jovem</option></select></div><div id="marketList"></div></div><div><div class="card"><h3 style="margin-top:0">💰 Finanças</h3><div class="finance-kpis"><div><small>CAIXA</small><b id="financeCash">—</b></div><div><small>FOLHA/MÊS</small><b id="financeWages">—</b></div><div><small>RECEITAS</small><b id="financeIncome">—</b></div><div><small>DESPESAS</small><b id="financeExpenses">—</b></div></div><div id="financeLedger" class="ledger"></div></div><div class="card" style="margin-top:14px"><h3 style="margin-top:0">🏷 Vender jogador</h3><p class="muted">A proposta depende do valor de mercado, idade e OVR.</p><div id="sellList" class="sell-list"></div></div></div></div></section><section id="inbox" class="page">
+<div class="social-layout"><div class="card"><div class="season-head"><div><h2 style="margin:0">✉ Caixa de Entrada</h2><p class="muted">Notícias do clube e solicitações recebidas.</p></div><button class="btn alt" onclick="markAllInboxRead()">MARCAR COMO LIDAS</button></div><div id="inboxList"></div></div>
+<div class="card"><h3 style="margin-top:0">🤝 Solicitações de amizade</h3><div id="friendRequestsList"></div></div></div>
+</section>
+<section id="friends" class="page">
+<div class="social-layout"><div class="card"><h2 style="margin-top:0">👥 Lista de Amigos</h2><p class="muted">Adicione jogadores pelo ID UFM. As amizades ficam vinculadas à sua conta online.</p><div class="social-search"><input id="socialFriendId" placeholder="Ex.: UFM-123456" maxlength="10"><button class="btn" onclick="sendFriendRequest()">ADICIONAR</button></div><div id="firebaseFriendsList" class="social-list"></div></div>
+<div><div class="card"><h3 style="margin-top:0">🪪 Seu ID UFM</h3><div class="room-code" id="socialMyId">UFM-000000</div><p class="muted">Passe este ID para seus amigos encontrarem sua conta.</p></div><div class="card" style="margin-top:14px"><h3 style="margin-top:0">📨 Pedidos enviados</h3><div id="sentRequestsList"></div></div></div></div>
+</section><section id="online" class="page">
+
+<div id="backendDiagV103" class="card" style="margin:12px 0;border-color:#285d3d">
+  <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap">
+    <div><b>🔥 Diagnóstico Firebase V10.3</b><div class="muted" id="backendDiagTextV103">Aguardando teste...</div></div>
+    <button class="btn secondary" onclick="diagnoseBackendV103()">TESTAR BACKEND</button>
+  </div>
+  <div id="backendDiagStepsV103" style="margin-top:9px;font-size:11px;line-height:1.7"></div>
+</div>
+<div class="card" id="realPvpCard">
+ <div class="season-head"><div><h2 style="margin:0">🌐 Multiplayer PvP • Partida ao Vivo</h2><p class="muted">Partidas sincronizadas entre duas contas pelo backend.</p></div><div class="pvp-status"><span class="pvp-dot"></span><span id="pvpBackendStatus">BACKEND ONLINE</span></div></div>
+ <div id="pvpInvites"></div>
+ <div id="pvpLobby">
+  <div class="social-search"><input id="pvpTargetId" placeholder="ID do adversário: UFM-123456" maxlength="10"><button class="btn" onclick="sendPvpChallengeV9()">DESAFIAR</button></div>
+  <p class="muted">Você também pode desafiar alguém pela sua Lista de Amigos.</p>
+ </div>
+ <div id="pvpRoom" class="pvp-panel hidden">
+  <div class="pvp-match"><div class="pvp-team"><b id="pvpHomeName">Casa</b><small id="pvpHomeStatus">aguardando</small></div><div class="pvp-score" id="pvpScore">0 × 0</div><div class="pvp-team"><b id="pvpAwayName">Fora</b><small id="pvpAwayStatus">aguardando</small></div></div>
+  <div style="text-align:center;margin-bottom:10px"><b id="pvpClock">Sala criada</b></div>
+  <div class="social-actions" style="justify-content:center;margin-bottom:10px"><button class="btn" id="pvpReadyBtn" onclick="togglePvpReadyV9()">FICAR PRONTO</button><button class="btn alt" onclick="leavePvpRoomV9()">SAIR DA SALA</button></div>
+  
+<div id="pvpManagerV104" class="pvp-manager-v104">
+ <div class="box">
+  <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b>👥 Elenco para o PvP</b><small class="muted">Clique em 2 jogadores para trocar</small></div>
+  <div id="pvpXiV104" class="pvp-xi-v104"></div>
+ </div>
+ <div class="box">
+  <b>🧠 Táticas</b>
+  <div class="pvp-tactics-v104" style="margin-top:8px">
+   <label><small class="muted">Formação</small><select id="pvpFormationV104" onchange="savePvpSetupV104()"><option>4-3-3</option><option>4-4-2</option><option>4-2-3-1</option><option>3-5-2</option></select></label>
+   <label><small class="muted">Mentalidade</small><select id="pvpMentalityV104" onchange="savePvpSetupV104()"><option value="BALANCED">Equilibrado</option><option value="ATTACK">Ofensivo</option><option value="DEFEND">Defensivo</option></select></label>
+  </div>
+  <button class="btn alt" style="margin-top:10px;width:100%" onclick="autoPickPvpV104()">ESCALAÇÃO AUTOMÁTICA</button>
+  <small class="muted" style="display:block;margin-top:8px">A escalação e a formação são enviadas à sala quando você fica pronto.</small>
+ </div>
+</div>
+<div id="pvpMatchActions" class="social-actions hidden" style="justify-content:center;margin-bottom:10px"><button class="btn alt" onclick="sendPvpActionV9('ATTACK')">⚔ MAIS ATAQUE</button><button class="btn alt" onclick="sendPvpActionV9('BALANCED')">⚖ EQUILIBRADO</button><button class="btn alt" onclick="sendPvpActionV9('DEFEND')">🛡 DEFENDER</button></div>
+  <div class="pvp-log" id="pvpLog"></div>
+ </div>
+</div><div class="online-grid"><div><div class="card"><div class="online-profile"><div><small class="muted">SEU PERFIL ONLINE</small><h2 id="onlineClubName" style="margin:4px 0">Meu Clube</h2><div class="online-id" id="onlinePlayerId">UFM-000000</div></div><span class="season-badge" id="onlineConnectionBadge">LOCAL</span></div><p class="transport-note">A carreira continua salva separadamente neste navegador. O lobby abaixo prepara os dados de PvP; para dois computadores jogarem a mesma partida, a próxima etapa conecta esta camada a um servidor em tempo real.</p></div><div class="card legacy-pvp-v108" style="margin-top:14px;display:none"><h2 style="margin-top:0">⚔ Sala PvP</h2><div class="online-actions"><button class="btn" onclick="createPvpRoom()">CRIAR SALA</button><input id="joinRoomCode" maxlength="6" placeholder="CÓDIGO DA SALA"><button class="btn alt" onclick="joinPvpRoom()">ENTRAR NA SALA</button><button class="btn alt" onclick="leavePvpRoom()">SAIR</button></div><div id="pvpRoomBox" style="margin-top:12px"></div></div><div class="card legacy-pvp-v108" style="margin-top:14px;display:none"><h3 style="margin-top:0">👥 Amigos / Desafios</h3><div class="online-actions"><input id="friendIdInput" placeholder="ID do amigo: UFM-123456"><button class="btn alt" onclick="addOnlineFriend()">ADICIONAR</button></div><div id="onlineFriends" style="margin-top:10px"></div></div></div><div><div class="card" style="display:none"><h3 style="margin-top:0">🎮 Prévia do confronto</h3><div id="pvpPreview"></div><button id="pvpReadyBtn" class="btn" style="width:100%;margin-top:10px" onclick="togglePvpReady()">MARCAR COMO PRONTO</button><button id="pvpStartBtn" class="btn alt" style="width:100%;margin-top:8px" onclick="startPvpMatch()" disabled>INICIAR PvP</button></div><div class="card" style="display:none;margin-top:14px"><h3 style="margin-top:0">📡 Eventos da sala</h3><div id="onlineLog" class="online-log"></div></div></div></div></section><section id="club" class="page"><div class="club-layout"><div><div class="card"><div class="season-head"><div><h2 style="margin:0">🏟 Estádio</h2><p class="muted">A capacidade influencia diretamente sua receita nos jogos em casa.</p></div><button type="button" class="btn" onclick="upgradeFacility('stadium')">AMPLIAR ESTÁDIO</button></div><div class="stadium-visual"><div class="stadium-name" id="stadiumName">Arena do Clube</div><div class="stadium-field"></div><div class="stadium-cap" id="stadiumCapacity">12.500 lugares</div></div></div><div class="card" style="margin-top:14px"><h3>🏗 Estruturas</h3><div id="facilityGrid" class="facility-grid"></div></div></div><div><div class="card"><h3 style="margin-top:0">🌱 Categorias de Base</h3><p class="muted">Novos talentos aparecem conforme o nível da base.</p><button class="btn alt" onclick="scoutAcademy()">OBSERVAR NOVA GERAÇÃO</button><div id="academyList" style="margin-top:10px"></div></div><div class="card" style="margin-top:14px"><h3 style="margin-top:0">📊 Impacto da estrutura</h3><div id="facilityImpact" class="activity"></div></div></div></div>
+<div class="scout-layout" style="margin-top:14px">
+<div class="card"><div class="season-head"><div><h2 style="margin:0">🔎 Rede de Olheiros</h2><p class="muted">Contrate olheiros melhores para encontrar jogadores mais promissores.</p></div><button class="btn alt" onclick="refreshScouts()">NOVOS OLHEIROS</button></div><div id="scoutMarket"></div><h3>📋 Relatórios</h3><div id="scoutReports"></div></div>
+<div class="card"><h2 style="margin-top:0">📈 Desenvolvimento</h2><div class="training-box"><b>Plano de treinamento</b><select id="trainingFocus" onchange="setTrainingFocus()"><option>Equilibrado</option><option>Finalização</option><option>Passe</option><option>Velocidade</option><option>Defesa</option><option>Físico</option></select><p class="muted">O progresso considera idade, potencial, CT e comissão técnica.</p><button class="btn" onclick="runTrainingCycle()">REALIZAR CICLO DE TREINO</button></div><div id="developmentList"></div></div>
+</div></section></main></section><div class="toast" id="toast"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+/* ===== UFM V14 • INTERFACE CONSOLIDADA ===== */
+#autosaveV14{white-space:nowrap}#autosaveV14.saving{color:#ffd166;border-color:#7a6225}#autosaveV14.saved{color:#8eecaa;border-color:#28623f}
+.friend-status.off{background:#66736b}.friend-status.on{background:var(--green);box-shadow:0 0 8px #59e58b88}
+.v14-zone{font-size:8px;font-weight:900;padding:3px 5px;border-radius:6px;margin-left:4px}.v14-lib{background:#173e73;color:#a9d0ff}.v14-sul{background:#664914;color:#ffdc8c}.v14-down{background:#68212a;color:#ffb6bd}.v14-up{background:#174f31;color:#a6efbf}
+.v14-comp{border:1px solid #245a3a;border-radius:14px;padding:12px;margin:10px 0;background:#07140d}.v14-comp h4{margin:0 0 7px;color:#8ff0ad}
+.v14-table-row{display:grid;grid-template-columns:34px minmax(130px,1fr) repeat(8,40px);gap:4px;padding:6px;border-top:1px solid #173823;font-size:11px;align-items:center}
+.v14-table-row.me{background:#10341f;border-radius:8px}.v14-fixture{display:grid;grid-template-columns:75px 1fr auto;gap:8px;padding:7px;margin-top:5px;border:1px solid #173823;border-radius:8px;font-size:11px}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+/* ===== UFM V15 • COMPETIÇÕES UNIFICADAS ===== */
+.v15-comp{border:1px solid #245a3a;border-radius:14px;padding:14px;margin:12px 0;background:#07140d}
+.v15-comp h3{margin:0 0 6px;color:#8ff0ad}.v15-meta{font-size:11px;color:#9db9a7;margin-bottom:10px}
+.v15-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:9px}
+.v15-group{border:1px solid #183b27;border-radius:10px;padding:9px}.v15-group.me{border-color:#45e47c;box-shadow:0 0 0 1px #45e47c33}
+.v15-row{display:grid;grid-template-columns:24px 1fr 30px 30px 30px;gap:5px;font-size:10px;padding:4px 2px;border-top:1px solid #143421}
+.v15-row.user{background:#10351f;border-radius:6px}.v15-ko{display:grid;gap:6px}.v15-ko-game{display:grid;grid-template-columns:100px 1fr auto;gap:8px;padding:8px;border:1px solid #183b27;border-radius:8px;font-size:11px}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+/* ===== UFM V18.1 • NOVA INTERFACE DA PARTIDA ===== */
+#match181{margin-top:14px}
+#match181 .m181-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.7fr);gap:14px}
+#match181 .m181-card{background:rgba(4,29,18,.82);border:1px solid rgba(83,218,137,.25);border-radius:15px;padding:14px}
+#match181 .m181-score{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;text-align:center;gap:12px}
+#match181 .m181-score strong{font-size:38px}
+#match181 .m181-phase{text-align:center;font-weight:900;color:#ffd45e;margin-bottom:8px}
+#match181 .m181-bar{height:6px;background:#163b2b;border-radius:99px;overflow:hidden;margin:12px 0}
+#match181 .m181-bar i{display:block;height:100%;width:0;background:#58df8d;transition:.2s}
+#match181 .m181-actions{display:flex;gap:8px;flex-wrap:wrap}
+#match181 .m181-actions button{flex:1;min-width:180px;min-height:44px;font-weight:900}
+#match181 .m181-rosters{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#match181 .m181-list{display:grid;gap:6px;max-height:390px;overflow:auto}
+#match181 .m181-p{display:flex;justify-content:space-between;gap:8px;padding:8px;border:1px solid rgba(83,218,137,.18);border-radius:9px}
+#match181 .m181-p small{opacity:.65}
+#match181 .m181-sub{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end}
+#match181 .m181-sub select{width:100%}
+#match181 .m181-half{padding:10px;text-align:center;border:1px solid rgba(255,212,94,.45);border-radius:10px;background:rgba(255,212,94,.08);font-weight:900;margin:8px 0}
+#match181 .m181-feed{max-height:260px;overflow:auto;display:flex;flex-direction:column-reverse;gap:6px}
+#match181 .m181-event{padding:7px 9px;border-bottom:1px solid rgba(255,255,255,.06)}
+@media(max-width:780px){
+ #match181 .m181-grid,#match181 .m181-rosters{grid-template-columns:1fr}
+ #match181 .m181-sub{grid-template-columns:1fr 1fr}
+ #match181 .m181-sub button{grid-column:1/-1}
+ #match181 .m181-score strong{font-size:30px}
+}
+</style>
+
+
+
+<style>
+/* ===== UFM V18.2 • MATCH CENTER MODERNO ===== */
+#match181{
+ --mc-bg:rgba(7,22,16,.92);
+ --mc-card:linear-gradient(145deg,rgba(16,48,34,.92),rgba(7,28,19,.96));
+ --mc-line:rgba(111,255,170,.14);
+ --mc-soft:rgba(255,255,255,.055);
+ --mc-text:#f4fff8;
+ --mc-muted:#91a99b;
+ --mc-green:#64ef9b;
+ --mc-gold:#ffd56a;
+ color:var(--mc-text);
+ max-width:1440px;margin:18px auto 40px;
+}
+#match181 .m181-grid{grid-template-columns:minmax(0,1.55fr) minmax(330px,.75fr);gap:18px}
+#match181 .m181-card{
+ position:relative;overflow:hidden;background:var(--mc-card);
+ border:1px solid var(--mc-line);border-radius:22px;padding:18px;
+ box-shadow:0 18px 45px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.035);
+ backdrop-filter:blur(14px)
+}
+#match181 .m181-card:before{
+ content:"";position:absolute;inset:0 0 auto;height:1px;
+ background:linear-gradient(90deg,transparent,rgba(100,239,155,.5),transparent)
+}
+#match181 .m181-phase{
+ width:max-content;max-width:100%;margin:0 auto 14px;padding:7px 13px;
+ border:1px solid rgba(255,213,106,.22);border-radius:999px;
+ background:rgba(255,213,106,.07);color:var(--mc-gold);
+ font-size:12px;letter-spacing:.12em;text-transform:uppercase
+}
+#match181 .m181-score{
+ min-height:150px;padding:18px;border:1px solid var(--mc-line);
+ border-radius:18px;background:
+ radial-gradient(circle at 50% 0%,rgba(100,239,155,.10),transparent 45%),
+ rgba(0,0,0,.12)
+}
+#match181 .m181-score>div{font-size:17px;font-weight:850}
+#match181 .m181-score small{display:inline-block;margin-top:5px;color:var(--mc-muted);font-size:10px;letter-spacing:.16em}
+#match181 .m181-score strong{
+ padding:8px 18px;border-radius:16px;background:#061b12;
+ border:1px solid rgba(100,239,155,.18);font-size:44px;letter-spacing:-.04em;
+ box-shadow:inset 0 0 28px rgba(100,239,155,.04)
+}
+#match181 .m181-bar{height:8px;margin:16px 0 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.04)}
+#match181 .m181-bar i{background:linear-gradient(90deg,#35c876,var(--mc-green));box-shadow:0 0 14px rgba(100,239,155,.38)}
+#match181 .m181-actions{gap:10px}
+#match181 .m181-actions button,#match181 .m181-sub button{
+ border-radius:13px!important;min-height:46px!important;border:1px solid rgba(255,255,255,.08)!important;
+ box-shadow:0 7px 18px rgba(0,0,0,.16);transition:transform .16s ease,filter .16s ease
+}
+#match181 .m181-actions button:hover,#match181 .m181-sub button:hover{transform:translateY(-1px);filter:brightness(1.08)}
+#match181 h3{margin:0 0 15px;font-size:17px;letter-spacing:-.01em}
+#match181 .m181-sub{
+ padding:13px;border:1px solid var(--mc-line);border-radius:16px;background:rgba(0,0,0,.12)
+}
+#match181 .m181-sub label{font-size:10px;font-weight:900;letter-spacing:.12em;color:var(--mc-muted)}
+#match181 .m181-sub select{
+ margin-top:7px;min-height:44px;padding:0 12px;border-radius:11px;
+ background:#0b281b;color:var(--mc-text);border:1px solid rgba(100,239,155,.18);outline:none
+}
+#match181 .m181-sub select:focus{border-color:rgba(100,239,155,.65);box-shadow:0 0 0 3px rgba(100,239,155,.08)}
+#match181 #m181SubCount{
+ display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(100,239,155,.08);
+ border:1px solid rgba(100,239,155,.13);color:var(--mc-green);font-size:12px
+}
+#match181 .m181-rosters{gap:12px}
+#match181 .m181-rosters>div>b{
+ display:block;margin-bottom:9px;color:var(--mc-muted);font-size:10px;letter-spacing:.14em
+}
+#match181 .m181-list{gap:7px;max-height:430px;padding-right:3px}
+#match181 .m181-p{
+ min-height:52px;padding:9px 11px;border-radius:12px;background:var(--mc-soft);
+ border:1px solid rgba(255,255,255,.055);transition:.16s ease
+}
+#match181 .m181-p:hover{border-color:rgba(100,239,155,.25);background:rgba(100,239,155,.07);transform:translateX(2px)}
+#match181 .m181-p>span>b{font-size:12px}
+#match181 .m181-p>span small{color:var(--mc-muted);font-size:10px}
+#match181 .m181-p>b{
+ min-width:32px;height:28px;display:grid;place-items:center;border-radius:9px;
+ background:rgba(100,239,155,.10);color:var(--mc-green);font-size:12px
+}
+#match181 .m181-feed{
+ min-height:150px;max-height:280px;padding:4px 10px;border-radius:14px;
+ background:rgba(0,0,0,.14);border:1px solid rgba(255,255,255,.045)
+}
+#match181 .m181-event{padding:10px 5px;color:#d9e8df;font-size:12px;border-bottom-color:rgba(255,255,255,.05)}
+#match181 .m181-half{
+ border-radius:14px;padding:12px;background:linear-gradient(90deg,rgba(255,213,106,.07),rgba(255,213,106,.12),rgba(255,213,106,.07));
+ color:#ffe49c
+}
+@media(max-width:900px){#match181 .m181-grid{grid-template-columns:1fr}}
+@media(max-width:600px){
+ #match181{margin-top:10px}
+ #match181 .m181-card{padding:13px;border-radius:17px}
+ #match181 .m181-score{min-height:125px;padding:12px;gap:8px}
+ #match181 .m181-score>div{font-size:13px}
+ #match181 .m181-score strong{font-size:31px;padding:7px 12px}
+ #match181 .m181-actions{display:grid;grid-template-columns:1fr}
+ #match181 .m181-actions button{min-width:0;width:100%}
+ #match181 .m181-sub{grid-template-columns:1fr}
+ #match181 .m181-sub button{grid-column:auto}
+ #match181 .m181-rosters{grid-template-columns:1fr 1fr}
+}
+@media(max-width:420px){#match181 .m181-rosters{grid-template-columns:1fr}}
+</style>
+
+
+
+<style>
+/* ===== UFM V18.3 • SALA DE TROFÉUS PREMIUM ===== */
+#trophies183{max-width:1420px;margin:10px auto 42px;color:#f4fff8}
+#trophies183 .tr-hero{
+ position:relative;overflow:hidden;padding:25px;border-radius:24px;
+ background:radial-gradient(circle at 80% 10%,rgba(255,210,90,.13),transparent 30%),
+ linear-gradient(145deg,rgba(18,50,35,.96),rgba(6,25,17,.98));
+ border:1px solid rgba(255,215,110,.18);box-shadow:0 20px 50px rgba(0,0,0,.25)
+}
+#trophies183 .tr-kicker{font-size:10px;font-weight:950;letter-spacing:.2em;color:#ffd76e;text-transform:uppercase}
+#trophies183 .tr-title{font-size:31px;font-weight:950;letter-spacing:-.035em;margin:7px 0 4px}
+#trophies183 .tr-sub{color:#91a99b;max-width:650px;font-size:13px}
+#trophies183 .tr-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}
+#trophies183 .tr-stat{padding:13px;border-radius:15px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.06)}
+#trophies183 .tr-stat b{display:block;font-size:22px;color:#ffe08a}
+#trophies183 .tr-stat span{font-size:10px;color:#8fa79a;text-transform:uppercase;letter-spacing:.09em}
+#trophies183 .tr-section{margin-top:17px;padding:18px;border-radius:21px;background:linear-gradient(145deg,rgba(15,45,31,.9),rgba(7,27,18,.96));border:1px solid rgba(102,239,157,.12)}
+#trophies183 .tr-section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px}
+#trophies183 .tr-section h3{margin:0;font-size:17px}
+#trophies183 .tr-section small{color:#8fa79a}
+#trophies183 .tr-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#trophies183 .tr-card{
+ min-height:145px;padding:15px;border-radius:17px;background:rgba(255,255,255,.035);
+ border:1px solid rgba(255,215,110,.11);display:flex;gap:13px;align-items:flex-start;
+ transition:transform .16s ease,border-color .16s ease,background .16s ease
+}
+#trophies183 .tr-card:hover{transform:translateY(-2px);border-color:rgba(255,215,110,.3);background:rgba(255,215,110,.055)}
+#trophies183 .tr-cup{
+ flex:0 0 48px;width:48px;height:48px;display:grid;place-items:center;border-radius:15px;
+ background:linear-gradient(145deg,rgba(255,215,110,.18),rgba(255,215,110,.06));
+ border:1px solid rgba(255,215,110,.18);font-size:25px
+}
+#trophies183 .tr-card h4{margin:1px 0 5px;font-size:14px}
+#trophies183 .tr-meta{font-size:11px;color:#93aa9e;line-height:1.55}
+#trophies183 .tr-chip{display:inline-flex;margin-top:8px;padding:5px 8px;border-radius:999px;background:rgba(100,239,155,.08);border:1px solid rgba(100,239,155,.12);font-size:10px;color:#72f0a6}
+#trophies183 .tr-empty{text-align:center;padding:34px 15px;border:1px dashed rgba(255,255,255,.12);border-radius:16px;color:#8fa79a}
+@media(max-width:900px){#trophies183 .tr-grid{grid-template-columns:repeat(2,1fr)}#trophies183 .tr-stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){#trophies183 .tr-grid{grid-template-columns:1fr}#trophies183 .tr-title{font-size:25px}#trophies183 .tr-hero{padding:18px}}
+</style>
+
+
+
+<style>
+/* ===== UFM V18.4 • MATCH CENTER PREMIUM ===== */
+#match181{max-width:1460px!important;margin:14px auto 44px!important}
+#match181 .m184-top{
+ display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;margin-bottom:12px;
+ padding:14px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(15,47,32,.96),rgba(7,28,19,.96));
+ border:1px solid rgba(102,239,157,.15);box-shadow:0 12px 30px rgba(0,0,0,.18)
+}
+#match181 .m184-eyebrow{font-size:10px;font-weight:950;letter-spacing:.17em;color:#65ef9c;text-transform:uppercase}
+#match181 .m184-comp{font-size:20px;font-weight:950;letter-spacing:-.025em;margin-top:3px}
+#match181 .m184-meta{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+#match181 .m184-pill{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:11px;font-weight:800;color:#c7d9cf}
+#match181 .m184-pill.gold{background:rgba(255,213,106,.08);border-color:rgba(255,213,106,.17);color:#ffe08a}
+#match181 .m181-grid{grid-template-columns:minmax(0,1fr)!important;gap:14px!important}
+#match181 .m184-main{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(330px,.7fr);gap:14px}
+#match181 .m184-left{min-width:0}
+#match181 .m184-right{min-width:0}
+#match181 .m181-card{border-radius:20px!important;padding:16px!important}
+#match181 .m181-score{min-height:128px!important;border-radius:17px!important}
+#match181 .m181-score strong{font-size:40px!important}
+#match181 .m181-phase{margin-bottom:10px!important}
+#match181 .m181-actions button{background:#f4f6f5!important;color:#0a1710!important;border:0!important}
+#match181 .m181-actions button.primary{background:linear-gradient(135deg,#62ef9a,#39c977)!important;color:#062012!important}
+#match181 .m181-actions button:hover{filter:brightness(1.04)!important}
+#match181 .m184-techfeed{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:14px;margin-top:14px}
+#match181 .m181-rosters{grid-template-columns:1fr 1fr!important}
+#match181 .m181-list{max-height:320px!important}
+#match181 .m181-p{min-height:45px!important;padding:7px 9px!important}
+#match181 .m181-p>span>b{font-size:11px!important}
+#match181 .m181-p>span small{font-size:9px!important}
+#match181 .m181-p>b{height:26px!important;min-width:31px!important}
+#match181 .m181-feed{min-height:180px!important;max-height:240px!important}
+#match181 .m184-strength{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+#match181 .m184-mini{padding:9px 10px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.055)}
+#match181 .m184-mini span{display:block;font-size:9px;color:#8fa79a;text-transform:uppercase;letter-spacing:.08em}
+#match181 .m184-mini b{display:block;margin-top:3px;font-size:13px}
+@media(max-width:980px){
+ #match181 .m184-main,#match181 .m184-techfeed{grid-template-columns:1fr}
+ #match181 .m184-right{order:2}
+}
+@media(max-width:600px){
+ #match181 .m184-top{grid-template-columns:1fr}
+ #match181 .m184-meta{justify-content:flex-start}
+ #match181 .m184-comp{font-size:17px}
+ #match181 .m184-strength{grid-template-columns:1fr 1fr 1fr}
+ #match181 .m181-rosters{grid-template-columns:1fr!important}
+}
+</style>
+
+
+
+<style>
+/* ===== UFM V18.5 • COPAS CONTINENTAIS EUROPEIAS ===== */
+.euro185-wrap{margin-top:14px}
+.euro185-head{display:flex;justify-content:space-between;gap:12px;align-items:end;margin-bottom:12px}
+.euro185-head h3{margin:0;font-size:18px}.euro185-head small{color:var(--muted)}
+.euro185-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.euro185-tab{border:1px solid var(--line);background:#0b1c13;color:var(--muted);padding:8px 11px;border-radius:999px;font-weight:900;cursor:pointer}
+.euro185-tab.on{background:#163923;color:#fff;border-color:#4bc77b}
+.euro185-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}
+.euro185-card{background:#09150f;border:1px solid var(--line);border-radius:14px;padding:13px}
+.euro185-table{width:100%;border-collapse:collapse}.euro185-table th,.euro185-table td{padding:8px 6px;border-bottom:1px solid var(--line);font-size:11px;text-align:center}
+.euro185-table th{font-size:9px;color:var(--muted)}.euro185-table th:nth-child(2),.euro185-table td:nth-child(2){text-align:left}
+.euro185-me{background:#153522}.euro185-fixture{display:grid;grid-template-columns:52px 1fr auto;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);align-items:center}
+.euro185-fixture small{color:var(--muted)}.euro185-badge{font-size:9px;padding:4px 7px;border-radius:999px;background:#14281d;color:#82e9a6}
+@media(max-width:850px){.euro185-grid{grid-template-columns:1fr}}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script id="ufm-clean-core">
+'use strict';
+/* ============================================================
+   UFM CLEAN CORE 1.0
+   Runtime reconstruído. Não depende de scripts V5–V19 antigos.
+   ============================================================ */
+(() => {
+  const VERSION = 'CLEAN-1.0';
+  const SAVE_FORMAT = 'json-v1';
+  const LOCAL_PREFIX = 'ufmCleanCareer:';
+  const OWNER_KEY = 'ufmCleanActiveUid';
+  const $ = id => document.getElementById(id);
+  const clone = value => JSON.parse(JSON.stringify(value));
+  const now = () => Date.now();
+
+  let auth = null;
+  let db = null;
+  let user = null;
+  let career = null;
+  let cloudLoading = false;
+  let saveTimer = null;
+  let saving = false;
+  let saveQueued = false;
+  let authMode = 'login';
+
+  window.UFM_VERSION = VERSION;
+  window.career = career;
+
+  function firebaseReady() {
+    return typeof window.firebase !== 'undefined' && firebase?.apps !== undefined;
+  }
+
+  function firebaseConfigFromPage() {
+    // Configuração pública do projeto UFM. Chaves Web Firebase não são segredo.
+    return {
+      apiKey: "AIzaSyBZW7kBwblMcOBVD4Ch25er6VxaUvqxEDo",
+      authDomain: "ultimate-football-manage-846fc.firebaseapp.com",
+      projectId: "ultimate-football-manage-846fc",
+      storageBucket: "ultimate-football-manage-846fc.firebasestorage.app",
+      messagingSenderId: "132095415615",
+      appId: "1:132095415615:web:e0813c299f05054425af8a",
+      measurementId: "G-QZ9KDQYMJD"
+    };
+  }
+
+  function setStatus(text, title='') {
+    const el = $('autosaveV14');
+    if (el) { el.textContent = text; el.title = title; }
+  }
+
+  function toastClean(message) {
+    const existing = $('toast');
+    if (existing) {
+      existing.textContent = message;
+      existing.style.display = 'block';
+      clearTimeout(toastClean.t);
+      toastClean.t = setTimeout(() => existing.style.display='none', 3200);
+      return;
+    }
+    console.log('[UFM]', message);
+  }
+  window.toast = toastClean;
+
+  function ownerOf(c) {
+    return c?.accountUid || c?.saveMeta?.ownerUid || null;
+  }
+
+  function stamp(c, uid) {
+    c.accountUid = uid;
+    c.saveMeta = c.saveMeta || {};
+    c.saveMeta.ownerUid = uid;
+    c.saveMeta.savedAt = now();
+    c.saveMeta.revision = Number(c.saveMeta.revision || 0) + 1;
+    c.saveMeta.version = VERSION;
+    return c;
+  }
+
+  function blankCareer(u) {
+    return {
+      manager: u?.displayName || '',
+      club: '',
+      short: 'FC',
+      country: 'Brasil',
+      league: 'Brasil • Série D',
+      style: 'Equilibrado',
+      primary: '#25a55d',
+      secondary: '#ffffff',
+      accountUid: u?.uid || '',
+      finance: { cash: 500000000, income: 0, expenses: 0, ledger: [] },
+      squad: [],
+      saveMeta: { ownerUid: u?.uid || '', savedAt: now(), revision: 0, version: VERSION }
+    };
+  }
+
+  function localKey(uid) { return LOCAL_PREFIX + uid; }
+
+  function saveLocal() {
+    if (!user || !career?.club) return false;
+    if (ownerOf(career) && ownerOf(career) !== user.uid) return false;
+    stamp(career, user.uid);
+    try {
+      localStorage.setItem(localKey(user.uid), JSON.stringify(career));
+      localStorage.setItem(OWNER_KEY, user.uid);
+      return true;
+    } catch (err) {
+      console.error('UFM CLEAN local save', err);
+      return false;
+    }
+  }
+
+  function cloudPayload(reason) {
+    const safe = clone(career);
+    // Critical rule: career is NEVER sent as a Firestore object.
+    return {
+      uid: user.uid,
+      email: user.email || '',
+      trainerName: user.displayName || safe.manager || 'Treinador',
+      career: null,
+      careerJson: JSON.stringify(safe),
+      saveFormat: SAVE_FORMAT,
+      saveVersion: VERSION,
+      saveReason: String(reason || 'autosave'),
+      saveClientAt: now(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+  }
+
+  async function saveCloud(reason='autosave') {
+    if (!user || !db || cloudLoading || !career?.club) return false;
+    if (ownerOf(career) && ownerOf(career) !== user.uid) {
+      setStatus('⚠ SAVE BLOQUEADO', 'A carreira pertence a outra conta.');
+      return false;
+    }
+    saveLocal();
+    if (saving) { saveQueued = true; return true; }
+    saving = true;
+    setStatus('☁ SALVANDO…');
+    try {
+      await db.collection('users').doc(user.uid).set(cloudPayload(reason), {merge:true});
+      setStatus('✓ NUVEM • CONTA ' + user.uid.slice(0,6), 'UFM ' + VERSION);
+      return true;
+    } catch (err) {
+      console.error('UFM CLEAN cloud save', err);
+      setStatus('⚠ LOCAL • NUVEM PENDENTE', String(err?.message || err));
+      toastClean('Falha na nuvem: ' + String(err?.code || err?.message || 'erro'));
+      return false;
+    } finally {
+      saving = false;
+      if (saveQueued) {
+        saveQueued = false;
+        setTimeout(() => saveCloud('fila'), 80);
+      }
+    }
+  }
+
+  function queueSave(reason='alteração') {
+    if (!career?.club) return;
+    saveLocal();
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => saveCloud(reason), 350);
+  }
+
+  function decodeCloud(data) {
+    try {
+      if (typeof data?.careerJson === 'string' && data.careerJson.trim())
+        return JSON.parse(data.careerJson);
+      // Legacy data is read-only compatibility. It is converted to JSON on next save.
+      if (data?.career && typeof data.career === 'object')
+        return clone(data.career);
+    } catch (err) {
+      console.error('UFM CLEAN decode', err);
+    }
+    return null;
+  }
+
+  function show(el, yes=true) {
+    if (!el) return;
+    el.classList.toggle('hidden', !yes);
+    if (yes && el.id === 'authGate') el.classList.add('show');
+  }
+
+  function showLanding() {
+    const land = $('ufmLanding');
+    if (land) land.style.display = 'block';
+    show($('authGate'), false);
+    show($('wizard'), false);
+    show($('game'), false);
+  }
+
+  function showWizard() {
+    const land = $('ufmLanding');
+    if (land) land.style.display = 'none';
+    show($('authGate'), false);
+    show($('wizard'), true);
+    show($('game'), false);
+    renderWizardStep();
+  }
+
+  function openGameClean() {
+    const land = $('ufmLanding');
+    if (land) land.style.display = 'none';
+    show($('authGate'), false);
+    show($('wizard'), false);
+    show($('game'), true);
+    window.career = career;
+    refreshBasicUI();
+    const first = document.querySelector('.page');
+    if (first) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const dashboard = $('dashboard') || first;
+      dashboard.classList.add('active');
+    }
+  }
+
+  async function loadCareer(u) {
+    cloudLoading = true;
+    setStatus('☁ CARREGANDO…');
+    try {
+      const ref = db.collection('users').doc(u.uid);
+      let snap = await ref.get();
+      if (!snap.exists) {
+        await ref.set({
+          uid:u.uid, email:u.email||'', trainerName:u.displayName||'Treinador',
+          career:null, careerJson:null, saveFormat:SAVE_FORMAT, saveVersion:VERSION,
+          createdAt:firebase.firestore.FieldValue.serverTimestamp()
+        }, {merge:true});
+        snap = await ref.get();
+      }
+      const data = snap.data() || {};
+      const cloud = decodeCloud(data);
+      let local = null;
+      try { local = JSON.parse(localStorage.getItem(localKey(u.uid)) || 'null'); } catch {}
+      if (local && ownerOf(local) && ownerOf(local) !== u.uid) local = null;
+      if (cloud && ownerOf(cloud) && ownerOf(cloud) !== u.uid) {
+        throw new Error('O save da nuvem pertence a outra conta.');
+      }
+      const ct = Number(cloud?.saveMeta?.savedAt || data.saveClientAt || 0);
+      const lt = Number(local?.saveMeta?.savedAt || 0);
+      const chosen = local?.club && (!cloud?.club || lt > ct) ? local : cloud;
+
+      if (chosen?.club) {
+        career = clone(chosen);
+        stamp(career, u.uid);
+        window.career = career;
+        saveLocal();
+        openGameClean();
+        if (chosen === local && (!cloud?.club || lt > ct)) await saveCloud('recuperação local');
+      } else {
+        career = blankCareer(u);
+        window.career = career;
+        showWizard();
+      }
+    } catch (err) {
+      console.error('UFM CLEAN load', err);
+      toastClean('Erro ao carregar: ' + String(err?.code || err?.message || err));
+      career = blankCareer(u);
+      window.career = career;
+      showWizard();
+    } finally {
+      cloudLoading = false;
+    }
+  }
+
+  async function initFirebase() {
+    if (!firebaseReady()) {
+      console.error('Firebase SDK não carregado.');
+      return;
+    }
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfigFromPage());
+    auth = firebase.auth();
+    db = firebase.firestore();
+    window.ufmAuth = auth;
+    window.ufmDb = db;
+
+    auth.onAuthStateChanged(async u => {
+      user = u || null;
+      window.ufmUser = user;
+      if (!u) { career = null; window.career = null; showLanding(); return; }
+      await loadCareer(u);
+    });
+  }
+
+  function friendlyAuth(err) {
+    const code = String(err?.code || '');
+    if (code.includes('invalid-credential') || code.includes('wrong-password')) return 'E-mail ou senha incorretos.';
+    if (code.includes('user-not-found')) return 'Conta não encontrada.';
+    if (code.includes('email-already-in-use')) return 'Este e-mail já está cadastrado.';
+    if (code.includes('weak-password')) return 'Use uma senha mais forte.';
+    return String(err?.message || err || 'Erro de autenticação.');
+  }
+
+  window.showAuthMode = function(mode='login') {
+    authMode = mode;
+    const land = $('ufmLanding'); if (land) land.style.display='none';
+    const gate = $('authGate'); if (gate) { gate.classList.remove('hidden'); gate.classList.add('show'); }
+    const nameField = $('authName')?.closest('.field');
+    if (nameField) nameField.style.display = mode === 'register' ? '' : 'none';
+    const err = $('authError'); if (err) err.textContent='';
+  };
+  window.openSiteAuth = window.showAuthMode;
+  window.returnToSite = showLanding;
+
+  window.submitAuth = async function() {
+    const email = $('authEmail')?.value?.trim() || '';
+    const pass = $('authPassword')?.value || '';
+    const name = $('authName')?.value?.trim() || '';
+    const errEl = $('authError'); if (errEl) errEl.textContent='';
+    try {
+      if (!auth) throw new Error('Firebase ainda não iniciou.');
+      if (authMode === 'register') {
+        if (name.length < 2) throw new Error('Digite o nome do treinador.');
+        const cr = await auth.createUserWithEmailAndPassword(email, pass);
+        await cr.user.updateProfile({displayName:name});
+        await db.collection('users').doc(cr.user.uid).set({
+          uid:cr.user.uid,email:cr.user.email||email,trainerName:name,
+          career:null,careerJson:null,saveFormat:SAVE_FORMAT,saveVersion:VERSION,
+          createdAt:firebase.firestore.FieldValue.serverTimestamp()
+        }, {merge:true});
+      } else {
+        await auth.signInWithEmailAndPassword(email, pass);
+      }
+    } catch (err) {
+      if (errEl) errEl.textContent = friendlyAuth(err);
+    }
+  };
+
+  window.logout = async function() {
+    try { saveLocal(); } catch {}
+    if (auth) await auth.signOut();
+  };
+  window.logoutV7 = window.logout;
+
+  // Minimal clean wizard controller using existing fields when present.
+  let wizardStep = 0;
+  function renderWizardStep() {
+    const steps = document.querySelectorAll('[data-step], .wizard-step');
+    if (steps.length) {
+      steps.forEach((el,i) => {
+        const n = Number(el.dataset.step ?? i);
+        el.classList.toggle('hidden', n !== wizardStep);
+      });
+    }
+    document.querySelectorAll('.step').forEach((el,i)=>el.classList.toggle('on',i<=wizardStep));
+  }
+  window.nextStep = function() { wizardStep++; renderWizardStep(); };
+  window.prevStep = function() { wizardStep=Math.max(0,wizardStep-1); renderWizardStep(); };
+  window.wizardNext = window.nextStep;
+  window.wizardPrev = window.prevStep;
+
+  function valueOf(...ids) {
+    for (const id of ids) {
+      const el=$(id);
+      if (el && typeof el.value === 'string' && el.value.trim()) return el.value.trim();
+    }
+    return '';
+  }
+
+  window.finishWizard = async function() {
+    if (!user) return;
+    const club = valueOf('clubName','teamName','wizardClub','clubInput') || career?.club || 'Nova FC';
+    const manager = valueOf('managerName','trainerName','wizardManager') || user.displayName || career?.manager || 'Treinador';
+    career = career || blankCareer(user);
+    career.club = club;
+    career.manager = manager;
+    career.short = (valueOf('clubShort','shortName') || club.replace(/[^A-Za-zÀ-ÿ]/g,'').slice(0,3) || 'FC').toUpperCase();
+    career.country = valueOf('countrySelect','country') || career.country || 'Brasil';
+    career.league = valueOf('leagueSelect','league') || career.league || 'Brasil • Série D';
+    stamp(career,user.uid);
+    window.career=career;
+    saveLocal();
+    openGameClean();
+    await saveCloud('criação do clube');
+  };
+  window.createClub = window.finishWizard;
+
+  function refreshBasicUI() {
+    if (!career) return;
+    const map = {
+      clubName:career.club, sidebarClub:career.club, managerName:career.manager,
+      accountTrainer:career.manager, accountUid:user?.uid ? user.uid.slice(0,12)+'…' : ''
+    };
+    for (const [id,val] of Object.entries(map)) if ($(id)) $(id).textContent=val;
+    document.documentElement.style.setProperty('--kit', career.primary || '#25a55d');
+    document.documentElement.style.setProperty('--kit2', career.secondary || '#ffffff');
+  }
+
+  window.goPage = function(id, button) {
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    const page=$(id); if (page) page.classList.add('active');
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+    if (button) button.classList.add('active');
+  };
+
+  window.saveCareerCloud = saveCloud;
+  window.scheduleCloudSave = () => queueSave('alteração');
+  window.UFMCleanCore = {
+    version:VERSION, save:saveCloud, queue:queueSave, load:loadCareer,
+    localSave:saveLocal, getCareer:()=>career, getUser:()=>user
+  };
+
+  // One autosave route only.
+  document.addEventListener('change', () => queueSave('interface'), true);
+  document.addEventListener('click', e => {
+    if (e.target?.closest?.('button') && career?.club) setTimeout(()=>queueSave('ação'),80);
+  }, true);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') saveLocal();
+  });
+  window.addEventListener('pagehide', saveLocal);
+
+  window.addEventListener('load', initFirebase, {once:true});
+})();
+</script>
+
+</body></html>
