@@ -1,0 +1,24 @@
+{
+  "id": "./",
+  "name": "Ultimate Football Manager",
+  "short_name": "UFM",
+  "description": "Ultimate Football Manager — sua carreira, seu clube e seu mundo.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#07130d",
+  "theme_color": "#07130d",
+  "categories": [
+    "games",
+    "sports"
+  ],
+  "icons": [
+    {
+      "src": "./icons/ufm-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
